@@ -1,3 +1,10 @@
 
+build/Debug/
 build/.vs/
 build/CMakeFiles/
+*.VC.*
+*.log
+*.obj
+*.tlog
+*.pdb
+*.ilk
