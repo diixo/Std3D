@@ -5,7 +5,8 @@
 
 --------------------------------------------------------*/
 
-#include <GL/glaux.h>
+#include <windows.h>
+#include <GL/gl.h>
 
 #include "Render.h"
 #include "View.hpp"
