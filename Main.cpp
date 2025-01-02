@@ -123,18 +123,16 @@ void renderScene(void)
 
    glMatrixMode(GL_MODELVIEW);
 
-   // CView::makeWorldToCamTest(eye, lookAt, up);
-
-   Matrix4x4 viewMtx0 = movement.calculateView();
-   Matrix4x4 viewMtx1 = position.calculateView();
 
    if (mode)
    {
-      glLoadMatrixf(viewMtx1.m);
+      Matrix4x4 viewMtx = position.calculateView();
+      glLoadMatrixf(viewMtx.m);
    }
    else
    {
-      glLoadMatrixf(viewMtx0.m);
+      Matrix4x4 viewMtx = movement.calculateView();
+      glLoadMatrixf(viewMtx.m);
    }
 
    frustum.setPosition(p, l, u);
@@ -149,7 +147,7 @@ void renderScene(void)
       fps = frame*1000.0/(time-timebase);
       timebase = time;
       frame = 0;
-      sprintf_s(title, "Spheres_Drawn=%d, Total_Spheres=%d, FPS=%8.2f", spheresDrawn, spheresTotal, fps);
+      sprintf_s(title, "Spheres_Drawn=%d, Total_Spheres=%d, FPS=%.2f", spheresDrawn, spheresTotal, fps);
       glutSetWindowTitle(title);
    }
 
@@ -165,52 +163,40 @@ void keyboard(unsigned char a, int x, int y)
 
 	switch(a)
    {
-      case '+': 
-         position.movement -= 2.f*speed;
-         movement.forward  += speed;
-         //view.movement     -= 2.f*speed;
-         break;
-
-      case '-': 
-         position.movement += 2.f*speed;
-         movement.forward  -= speed;
-         //view.movement     += 2.f*speed;
-         break;
-
-      case 'w': 
-      case 'W': 
+      case 'w':
+      case 'W':
          position.camPitch += speed;
-         movement.pitch    += speed;
+         movement.pitch += speed;
          //view.camPitch     += speed;
          break;
 
-      case 's': 
-      case 'S': 
+      case 's':
+      case 'S':
          position.camPitch -= speed;
-         movement.pitch    -= speed;
+         movement.pitch -= speed;
          //view.camPitch     -= speed;
          break;
 
-      case 'q': 
-      case 'Q': 
+      case 'q':
+      case 'Q':
          movement.yaw -= speed;
          //view.camYaw -= speed;
          break;
 
-      case 'e': 
-      case 'E': 
+      case 'e':
+      case 'E':
          movement.yaw += speed;
          //view.camYaw += speed;
          break;
 
-      case 'a': 
+      case 'a':
       case 'A':
          position.worldYaw -= speed;
          //view.worldYaw     -= speed;
          break;
 
-      case 'd': 
-      case 'D': 
+      case 'd':
+      case 'D':
          position.worldYaw += speed;
          //view.worldYaw     += speed;
          break;
@@ -223,6 +209,18 @@ void keyboard(unsigned char a, int x, int y)
       case 'g':
       case 'G':
          movement.side -= speed;
+         break;
+
+      case '+':
+         position.movement -= 2.f*speed;
+         movement.forward  += speed;
+         //view.movement     -= 2.f*speed;
+         break;
+
+      case '-':
+         position.movement += 2.f*speed;
+         movement.forward  -= speed;
+         //view.movement     += 2.f*speed;
          break;
 
       case 'r':
@@ -244,7 +242,6 @@ void keyboard(unsigned char a, int x, int y)
       case 'f':
       case 'F':
          frustumOn = !frustumOn;
-
          break;
       
       case 27: 
