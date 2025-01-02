@@ -12,7 +12,6 @@
 #include "View.hpp"
 
 
-
 void drawAABox(const AABox& box, float r, float g, float b)
 {
    glDisable(GL_CULL_FACE);
@@ -164,6 +163,7 @@ void drawPlanes(const FrustumG& frustum)
    //glEnable(GL_CULL_FACE);
 }
 
+
 void drawNormals(const FrustumG& frustum)
 {
    Vec3 a,b;
@@ -210,6 +210,7 @@ void drawNormals(const FrustumG& frustum)
    glEnd();
 }
 
+
 void drawAxes()
 {
    float offset = 1.5;
@@ -232,6 +233,7 @@ void drawAxes()
    glVertex3f(0, 0, offset);
    glEnd();
 }
+
 
 void drawFrustum(const FrustumG& frustum)
 {
