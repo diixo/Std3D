@@ -50,7 +50,7 @@ void changeSize(int w, int h)
    glLoadIdentity();
 
    // Set the viewport to be the entire window
-    glViewport(0, 0, w, h);
+   glViewport(0, 0, w, h);
 
    // Set the correct perspective.
    gluPerspective(30.f, ratio, nearP, farP);
@@ -130,11 +130,11 @@ void renderScene(void)
 
    if (mode)
    {
-      glLoadMatrixf( viewMtx1.m );
+      glLoadMatrixf(viewMtx1.m);
    }
    else
    {
-      glLoadMatrixf( viewMtx0.m );
+      glLoadMatrixf(viewMtx0.m);
    }
 
    frustum.setPosition(p, l, u);
@@ -149,8 +149,7 @@ void renderScene(void)
       fps = frame*1000.0/(time-timebase);
       timebase = time;
       frame = 0;
-      sprintf_s(title, "CamView v0.1   Spheres Drawn= %d, Total Spheres= %d, FPS= %8.2f",
-         spheresDrawn, spheresTotal, fps);
+      sprintf_s(title, "Spheres_Drawn=%d, Total_Spheres=%d, FPS=%8.2f", spheresDrawn, spheresTotal, fps);
       glutSetWindowTitle(title);
    }
 

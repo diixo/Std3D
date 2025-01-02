@@ -105,7 +105,7 @@ float Vec3::square() const
 
 void Vec3::print()
 {
-	printf("Vec3(%f, %f, %f)",x,y,z);
+	printf("Vec3(%f, %f, %f)",x, y, z);
 }
 
 

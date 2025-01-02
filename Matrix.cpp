@@ -121,3 +121,100 @@ Matrix4x4::operator const float*() const
    return static_cast<const float*>(&m[0]);
 }
 
+
+Matrix4x4 Matrix4x4::makeWorldToLocal(const Vec3& xAxis, const Vec3& yAxis, const Vec3& zAxis, const Vec3& origin)
+{
+   Matrix4x4 view;
+
+   view.m[0] = xAxis.x;
+   view.m[4] = xAxis.y;
+   view.m[8] = xAxis.z;
+   view.m[12] = -Vec3::dot(xAxis, origin);
+
+   view.m[1] = yAxis.x;
+   view.m[5] = yAxis.y;
+   view.m[9] = yAxis.z;
+   view.m[13] = -Vec3::dot(yAxis, origin);
+
+   view.m[2] = zAxis.x;
+   view.m[6] = zAxis.y;
+   view.m[10] = zAxis.z;
+   view.m[14] = -Vec3::dot(zAxis, origin);
+
+   return view;
+}
+
+
+Matrix4x4 Matrix4x4::makeLookAt(const Vec3& eye, const Vec3& lookAt, const Vec3& up)
+{
+   Vec3 zAxis = lookAt - eye;
+   zAxis.normalize();
+
+   Vec3 xAxis = Vec3::cross(up, zAxis);
+   xAxis.normalize();
+
+   Vec3 yAxis = Vec3::cross(zAxis, xAxis);
+   yAxis.normalize();
+
+   return Matrix4x4::makeWorldToLocal(xAxis, yAxis, -zAxis, eye);
+}
+
+
+void Matrix4x4::invert()
+{
+   const float a0 = m[0] * m[5] - m[1] * m[4];
+   const float a1 = m[0] * m[6] - m[2] * m[4];
+   const float a2 = m[0] * m[7] - m[3] * m[4];
+   const float a3 = m[1] * m[6] - m[2] * m[5];
+   const float a4 = m[1] * m[7] - m[3] * m[5];
+   const float a5 = m[2] * m[7] - m[3] * m[6];
+   const float b0 = m[8] * m[13] - m[9] * m[12];
+   const float b1 = m[8] * m[14] - m[10] * m[12];
+   const float b2 = m[8] * m[15] - m[11] * m[12];
+   const float b3 = m[9] * m[14] - m[10] * m[13];
+   const float b4 = m[9] * m[15] - m[11] * m[13];
+   const float b5 = m[10] * m[15] - m[11] * m[14];
+
+   const float det = a0 * b5 - a1 * b4 + a2 * b3 + a3 * b2 - a4 * b1 + a5 * b0;
+   //if ( !isZero(det) )
+   {
+      Matrix4x4 inverse;
+      inverse.m[0] = +m[5] * b5 - m[6] * b4 + m[7] * b3;
+      inverse.m[4] = -m[4] * b5 + m[6] * b2 - m[7] * b1;
+      inverse.m[8] = +m[4] * b4 - m[5] * b2 + m[7] * b0;
+      inverse.m[12] = -m[4] * b3 + m[5] * b1 - m[6] * b0;
+      inverse.m[1] = -m[1] * b5 + m[2] * b4 - m[3] * b3;
+      inverse.m[5] = +m[0] * b5 - m[2] * b2 + m[3] * b1;
+      inverse.m[9] = -m[0] * b4 + m[1] * b2 - m[3] * b0;
+      inverse.m[13] = +m[0] * b3 - m[1] * b1 + m[2] * b0;
+      inverse.m[2] = +m[13] * a5 - m[14] * a4 + m[15] * a3;
+      inverse.m[6] = -m[12] * a5 + m[14] * a2 - m[15] * a1;
+      inverse.m[10] = +m[12] * a4 - m[13] * a2 + m[15] * a0;
+      inverse.m[14] = -m[12] * a3 + m[13] * a1 - m[14] * a0;
+      inverse.m[3] = -m[9] * a5 + m[10] * a4 - m[11] * a3;
+      inverse.m[7] = +m[8] * a5 - m[10] * a2 + m[11] * a1;
+      inverse.m[11] = -m[8] * a4 + m[9] * a2 - m[11] * a0;
+      inverse.m[15] = +m[8] * a3 - m[9] * a1 + m[10] * a0;
+
+      const float invDet = static_cast<float>(1.f) / det;
+      inverse.m[0] *= invDet;
+      inverse.m[1] *= invDet;
+      inverse.m[2] *= invDet;
+      inverse.m[3] *= invDet;
+      inverse.m[4] *= invDet;
+      inverse.m[5] *= invDet;
+      inverse.m[6] *= invDet;
+      inverse.m[7] *= invDet;
+      inverse.m[8] *= invDet;
+      inverse.m[9] *= invDet;
+      inverse.m[10] *= invDet;
+      inverse.m[11] *= invDet;
+      inverse.m[12] *= invDet;
+      inverse.m[13] *= invDet;
+      inverse.m[14] *= invDet;
+      inverse.m[15] *= invDet;
+
+      *this = inverse;
+   }
+}
+

@@ -78,8 +78,8 @@ inline T minimum(const T left, const T right)
 inline
 Vec3 projectPointOnRay(const Vec3& origin, const Vec3& dir, const Vec3& pos)
 {
-   const float vsq   = Vec3::dot(dir, dir);
-   const float proj  = Vec3::dot((pos - origin), dir);
+   const float vsq  = Vec3::dot(dir, dir);
+   const float proj = Vec3::dot((pos - origin), dir);
    return (origin + dir*(proj / vsq));
 }
 
