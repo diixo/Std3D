@@ -51,8 +51,10 @@ void drawPoints(const FrustumG& frustum)
 }
 
 
-void drawLines(const FrustumG& frustum)
+void drawEdges(const FrustumG& frustum)
 {
+   glEnable(GL_CULL_FACE);
+
    glBegin(GL_LINE_LOOP);
    glColor4f(0.f, 1.f, 0.f, 1.f);
 
@@ -108,12 +110,13 @@ void drawLines(const FrustumG& frustum)
    glVertex3f(frustum.mFBR.x, frustum.mFBR.y, frustum.mFBR.z);
 
    glEnd();
+   glDisable(GL_CULL_FACE);
 }
 
 
 void drawPlanes(const FrustumG& frustum)
 {
-   //glDisable(GL_CULL_FACE);
+   glDisable(GL_CULL_FACE);
 
    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
@@ -160,7 +163,7 @@ void drawPlanes(const FrustumG& frustum)
 
    glEnd();
 
-   //glEnable(GL_CULL_FACE);
+   glEnable(GL_CULL_FACE);
 }
 
 
@@ -215,32 +218,34 @@ void drawNormals(const FrustumG& frustum)
 
 void drawAxes()
 {
+   glEnable(GL_CULL_FACE);
    float offset = 1.5;
 
    glBegin(GL_LINE_STRIP);
-   glColor4f(1.f, 0.5f, 0.f, 1.f);
+   glColor4f(1.f, 0.5f, 0.f, 1.f);  // X-axis
    glVertex3f(0, 0, 0);
    glVertex3f(offset, 0, 0);
    glEnd();
 
    glBegin(GL_LINE_STRIP);
-   glColor4f(0.5f, 1.f, 0.f, 1.f);
+   glColor4f(0.5f, 1.f, 0.f, 1.f);  // Y-axis
    glVertex3f(0, 0, 0);
    glVertex3f(0, offset, 0);
    glEnd();
 
    glBegin(GL_LINE_STRIP);
-   glColor4f(0.f, 0.5f, 1.f, 1.f);
+   glColor4f(0.f, 0.f, 1.f, 1.f);   // Z-axis
    glVertex3f(0, 0, 0);
    glVertex3f(0, 0, offset);
    glEnd();
+   glDisable(GL_CULL_FACE);
 }
 
 
 void drawFrustum(const FrustumG& frustum)
 {
    drawPoints(frustum);
-   drawLines(frustum);
+   drawEdges(frustum);
    drawPlanes(frustum);
    drawNormals(frustum);
 }
