@@ -147,7 +147,7 @@ Matrix4x4 Matrix4x4::makeWorldToLocal(const Vec3& xAxis, const Vec3& yAxis, cons
 
 Matrix4x4 Matrix4x4::makeLookAt(const Vec3& eye, const Vec3& lookAt, const Vec3& up)
 {
-   Vec3 zAxis = lookAt - eye;
+   Vec3 zAxis = eye - lookAt;
    zAxis.normalize();
 
    Vec3 xAxis = Vec3::cross(up, zAxis);
@@ -156,7 +156,7 @@ Matrix4x4 Matrix4x4::makeLookAt(const Vec3& eye, const Vec3& lookAt, const Vec3&
    Vec3 yAxis = Vec3::cross(zAxis, xAxis);
    yAxis.normalize();
 
-   return Matrix4x4::makeWorldToLocal(xAxis, yAxis, -zAxis, eye);
+   return Matrix4x4::makeWorldToLocal(xAxis, yAxis, zAxis, eye);
 }
 
 
