@@ -149,7 +149,7 @@ void renderScene(void)
       fps = frame*1000.0/(time-timebase);
       timebase = time;
       frame = 0;
-      sprintf(title, "CamView v0.1   Spheres Drawn= %d, Total Spheres= %d, FPS= %8.2f",
+      sprintf_s(title, "CamView v0.1   Spheres Drawn= %d, Total Spheres= %d, FPS= %8.2f",
          spheresDrawn, spheresTotal, fps);
       glutSetWindowTitle(title);
    }

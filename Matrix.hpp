@@ -143,11 +143,11 @@ Matrix3x3 Matrix3x3::operator * (const Matrix3x3& b) const
 
 
 inline 
-Matrix3x3 Matrix3x3::makeRotateX( const float& angle )
+Matrix3x3 Matrix3x3::makeRotateX(const float& angle)
 {
    const float rad = angle*ANG2RAD;
-   const float Cos = cos(rad);
-   const float Sin = sin(rad);
+   const float Cos = (float)cos(rad);
+   const float Sin = (float)sin(rad);
    Matrix3x3 mat;
    mat.m[0] = 1.f; mat.m[3] = 0.f; mat.m[6] = 0.f;
    mat.m[1] = 0.f; mat.m[4] = Cos; mat.m[7] = -Sin;
@@ -157,11 +157,11 @@ Matrix3x3 Matrix3x3::makeRotateX( const float& angle )
 
 
 inline 
-Matrix3x3 Matrix3x3::makeRotateY( const float& angle )
+Matrix3x3 Matrix3x3::makeRotateY(const float& angle)
 {
    const float rad = angle*ANG2RAD;
-   const float Cos = cos(rad);
-   const float Sin = sin(rad);
+   const float Cos = (float)cos(rad);
+   const float Sin = (float)sin(rad);
    Matrix3x3 mat;
    mat.m[0] = Cos;  mat.m[3] = 0.f; mat.m[6] = Sin;
    mat.m[1] = 0.f;  mat.m[4] = 1.f; mat.m[7] = 0.f;
@@ -171,11 +171,11 @@ Matrix3x3 Matrix3x3::makeRotateY( const float& angle )
 
 
 inline 
-Matrix3x3 Matrix3x3::makeRotateZ( const float& angle )
+Matrix3x3 Matrix3x3::makeRotateZ(const float& angle)
 {
    const float rad = angle*ANG2RAD;
-   const float Cos = cos(rad);
-   const float Sin = sin(rad);
+   const float Cos = (float)cos(rad);
+   const float Sin = (float)sin(rad);
    Matrix3x3 mat;
    mat.m[0] = Cos; mat.m[3] = -Sin; mat.m[6] = 0.f;
    mat.m[1] = Sin; mat.m[4] = Cos;  mat.m[7] = 0.f;
@@ -298,7 +298,6 @@ Vec3 Matrix4x4::operator * (const Vec3& v) const
 inline 
 void Matrix4x4::invert()
 {
-
    const float a0 = m[ 0]*m[ 5] - m[ 1]*m[ 4];
    const float a1 = m[ 0]*m[ 6] - m[ 2]*m[ 4];
    const float a2 = m[ 0]*m[ 7] - m[ 3]*m[ 4];
@@ -333,7 +332,7 @@ void Matrix4x4::invert()
       inverse.m[11] = - m[ 8]*a4 + m[ 9]*a2 - m[11]*a0;
       inverse.m[15] = + m[ 8]*a3 - m[ 9]*a1 + m[10]*a0;
 
-      const float invDet = static_cast<float>(1)/det;
+      const float invDet = static_cast<float>(1.f)/det;
       inverse.m[ 0] *= invDet;
       inverse.m[ 1] *= invDet;
       inverse.m[ 2] *= invDet;
@@ -399,8 +398,8 @@ inline
 Matrix4x4 Matrix4x4::makeRotateX(const float angle)
 {
    const float rad = angle*ANG2RAD;
-   const float Cos = cos(rad);
-   const float Sin = sin(rad);
+   const float Cos = (float)cos(rad);
+   const float Sin = (float)sin(rad);
    Matrix4x4 mat;
    mat.m[0] = 1.0; mat.m[4] = 0.0; mat.m[8] = 0.0;  mat.m[12] = 0.0;
    mat.m[1] = 0.0; mat.m[5] = Cos; mat.m[9] = -Sin; mat.m[13] = 0.0;
@@ -415,8 +414,8 @@ inline
 Matrix4x4 Matrix4x4::makeRotateY(const float angle)
 {
    const float rad = angle*ANG2RAD;
-   const float Cos = cos(rad);
-   const float Sin = sin(rad);
+   const float Cos = (float)cos(rad);
+   const float Sin = (float)sin(rad);
    Matrix4x4 mat;
    mat.m[0] = Cos;  mat.m[4] = 0.0; mat.m[8] = Sin;  mat.m[12] = 0.0;
    mat.m[1] = 0.0;  mat.m[5] = 1.0; mat.m[9] = 0.0;  mat.m[13] = 0.0;
@@ -431,8 +430,8 @@ inline
 Matrix4x4 Matrix4x4::makeRotateZ(const float angle)
 {
    const float rad = angle*ANG2RAD;
-   const float Cos = cos(rad);
-   const float Sin = sin(rad);
+   const float Cos = (float)cos(rad);
+   const float Sin = (float)sin(rad);
    Matrix4x4 mat;
    mat.m[0] = Cos; mat.m[4] = -Sin; mat.m[8] = 0.0;  mat.m[12] = 0.0;
    mat.m[1] = Sin; mat.m[5] = Cos;  mat.m[9] = 0.0;  mat.m[13] = 0.0;

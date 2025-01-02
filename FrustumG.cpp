@@ -46,7 +46,7 @@ void FrustumG::setPosition(const Vec3& eye, const Vec3& look, const Vec3& up)
 void FrustumG::update()
 {
    float NW, NH, FW, FH;
-   float tang = tan(float(ANG2RAD) * mAngle * float(0.5f));
+   float tang = (float)tan(ANG2RAD * mAngle * 0.5);
 
    NH = mNearD * tang;
    NW = NH * mRatio; 
@@ -80,7 +80,7 @@ void FrustumG::update()
 int FrustumG::pointInFrustum(const Vec3& p) const
 {
    int result = INSIDE;
-   for(int i=0; i < P_AMOUNT; i++)
+   for(int i = 0; i < P_AMOUNT; i++)
    {
       if (mClipPlanes[i].distance(p) < 0)
          return OUTSIDE;
@@ -94,7 +94,7 @@ int FrustumG::sphereInFrustum(const Vec3& p, float radius) const
    int result = INSIDE;
    float distance;
 
-   for(int i=0; i < P_AMOUNT; i++)
+   for(int i = 0; i < P_AMOUNT; i++)
    {
       distance = mClipPlanes[i].distance(p);
       if (distance < -radius)
@@ -109,7 +109,7 @@ int FrustumG::sphereInFrustum(const Vec3& p, float radius) const
 int FrustumG::boxInFrustum(const AABox& box) const
 {
    int result = INSIDE;
-   for(int i=0; i < P_AMOUNT; i++)
+   for(int i = 0; i < P_AMOUNT; i++)
    {
       if (mClipPlanes[i].distance(box.getVertexP(mClipPlanes[i].normal)) < 0)
          return OUTSIDE;
