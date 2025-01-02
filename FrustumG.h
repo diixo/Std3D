@@ -134,8 +134,6 @@ public:
 
    void setPosition(const Vec3& eye, const Vec3& lookAt, const Vec3& up);
 
-   void setPosition(const CPosition& position);
-
    void update();
 
 ////////////////////////////////////////////////////////////////

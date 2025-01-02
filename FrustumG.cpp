@@ -119,9 +119,3 @@ int FrustumG::boxInFrustum(const AABox& box) const
    return(result);
 }
 
-void FrustumG::setPosition(const CPosition& position)
-{
-   //Vec3 eye, lookAt, up;
-   //position.calculateView(eye, lookAt, up);
-   //setPosition(eye, lookAt, up);
-}
