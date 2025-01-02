@@ -66,31 +66,31 @@ void render()
 
    int cntr = 0;
 
-   for (int i = -40; i < 40; i+=4)
+   for (int i = -40; i < 40; i +=4)
    {
-      for(int k =  -40; k < 40; k+=4) 
+      for(int k = -40; k < 40; k+=4)
       {
          spheresTotal++;
          Vec3 a(i,0,k);
-         if (!frustumOn || (frustum.sphereInFrustum(a,0.5) == FrustumG::INSIDE)) 
+         if (!frustumOn || (frustum.sphereInFrustum(a, 0.5) == FrustumG::INSIDE))
          {
             ++cntr;
 
             glPushMatrix();
             glTranslatef(i,0,k);
             glColor3f(0,1,0);
-            glutSolidSphere(0.2,5,5);
+            glutSolidSphere(0.2, 5, 5);
             glPopMatrix();
             spheresDrawn++;
          }
-         else if(!frustumOn || (frustum.sphereInFrustum(a,0.5) == FrustumG::INTERSECT))
+         else if(!frustumOn || (frustum.sphereInFrustum(a, 0.5) == FrustumG::INTERSECT))
          {
             ++cntr;
 
             glPushMatrix();
             glTranslatef(i,0,k);
             glColor3f(1,1,0);
-            glutSolidSphere(0.2,5,5);
+            glutSolidSphere(0.2, 5, 5);
             glPopMatrix();
             spheresDrawn++;
          }
@@ -101,7 +101,7 @@ void render()
             glPushMatrix();
             glTranslatef(i,0,k);
             glColor3f(1,0,0);
-            glutSolidSphere(0.2,5,5);
+            glutSolidSphere(0.2, 5, 5);
             glPopMatrix();
             spheresDrawn++;
          }
@@ -284,7 +284,7 @@ void viewer(int argc, char **argv)
 
    frustum.setCamInternals(angle, 640, 640, nearP, 20.f);
 
-   frustum.setPosition(p,l,u);
+   frustum.setPosition(p, l, u);
 
    glutMainLoop();
 }
