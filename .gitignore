@@ -9,3 +9,5 @@ build/CMakeFiles/
 *.pdb
 *.ilk
 *.user
+
+build/*
