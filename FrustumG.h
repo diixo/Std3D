@@ -132,9 +132,7 @@ public:
 
    void setCamInternals(float angle, UInt32 width, UInt32 height, float nearD, float farD);
 
-   void setPosition(const Vec3& eye, const Vec3& lookAt, const Vec3& up);
-
-   void update();
+   void update(const Vec3& eye, const Vec3& lookAt, const Vec3& up);
 
 ////////////////////////////////////////////////////////////////
 
@@ -150,9 +148,7 @@ public:
 
    float mNearD, mFarD, mRatio, mAngle;            ///< camera configuration
 
-   Vec3 vDir, vRight, vUp;
-
-   Vec3 vMovement;
+   float NW, NH, FW, FH;
 
 };
 

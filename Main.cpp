@@ -135,7 +135,7 @@ void renderScene(void)
       glLoadMatrixf(viewMtx.m);
    }
 
-   frustum.setPosition(p, l, u);
+   frustum.update(p, l, u);
 
    render();
 
@@ -280,7 +280,7 @@ void viewer(int argc, char **argv)
 
    frustum.setCamInternals(angle, 640, 640, nearP, farF);
 
-   frustum.setPosition(p, l, u);
+   frustum.update(p, l, u);
 
    glutMainLoop();
 }
