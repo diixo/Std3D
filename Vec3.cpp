@@ -111,9 +111,9 @@ void Vec3::print()
 
 Vec3& Vec3::abs()
 {
-   x = ::fabs(x);
-   y = ::fabs(y);
-   z = ::fabs(z);
+   x = (float)::fabs(x);
+   y = (float)::fabs(y);
+   z = (float)::fabs(z);
 
    return *this;
 }

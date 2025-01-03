@@ -68,19 +68,10 @@ public:
 /**
 * Calculate minimum.
 */
-// note: don't name it as min(), it will surely conflict.
 template<typename T>
 inline T minimum(const T left, const T right)
 {
    return (left < right) ? left : right;
-}
-
-inline
-Vec3 projectPointOnRay(const Vec3& origin, const Vec3& dir, const Vec3& pos)
-{
-   const float vsq  = Vec3::dot(dir, dir);
-   const float proj = Vec3::dot((pos - origin), dir);
-   return (origin + dir*(proj / vsq));
 }
 
 #endif
