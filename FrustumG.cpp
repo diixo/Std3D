@@ -16,7 +16,7 @@ FrustumG::FrustumG()
 {}
 
 
-void FrustumG::setCamInternals(float fov_angle, UInt32 width, UInt32 height, float nearD, float farD) 
+void FrustumG::setCamInternals(float fov_angle, UInt32 width, UInt32 height, float nearD, float farD)
 {
    mRatio = float(width)/float(height);
    mAngle = fov_angle;
