@@ -8,6 +8,7 @@
 
 #include "FrustumG.h"
 #include <math.h>
+#include <stdio.h>
 
 
 FrustumG::FrustumG()
@@ -78,14 +79,14 @@ bool FrustumG::pointInFrustum(const Vec3& p) const
 }
 
 
-int FrustumG::sphereInFrustum(const Vec3& p, float radius) const
+int FrustumG::sphereInFrustum(const Vec3& center, float radius) const
 {
    int result = INSIDE;
    float distance;
 
    for(int i = 0; i < P_AMOUNT; i++)
    {
-      distance = mClipPlanes[i].distance(p);
+      distance = mClipPlanes[i].distance(center);
       if (distance < -radius)
          return OUTSIDE;
       else if (distance < radius)
@@ -108,3 +109,17 @@ int FrustumG::boxInFrustum(const AABox& box) const
    return(result);
 }
 
+
+void FrustumG::print() const
+{
+   printf("Frustum::>>>>>>>>>>>>>>>>\n");
+   mNTL.print("   NTL");
+   mNTR.print("   NTR");
+   mNBL.print("   NBL");
+   mNBR.print("   NBR");
+   mFTL.print("   FTL");
+   mFTR.print("   FTR");
+   mFBL.print("   FBL");
+   mFBR.print("   FBR");
+   printf("Frustum::<<<<<<<<<<<<<<<<\n");
+}

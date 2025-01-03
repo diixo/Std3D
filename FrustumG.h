@@ -93,8 +93,8 @@ public:
 inline
 Matrix4x4 CMovement::calculateView() const
 {
-   Matrix4x4 viewMtx       = Matrix4x4::makeLookAt(eye, lookAt, up);                      // final view matrix.
-   Matrix4x4 rotateRefCam  = Matrix4x4::makeRotateX(pitch) * Matrix4x4::makeRotateY(yaw); // camera coordinate-system rotation.
+   Matrix4x4 viewMtx      = Matrix4x4::makeLookAt(eye, lookAt, up);                      // final view matrix.
+   Matrix4x4 rotateRefCam = Matrix4x4::makeRotateX(pitch) * Matrix4x4::makeRotateY(yaw); // camera coordinate-system rotation.
 
    // Make final view Matrix with movement but without any rotations.
    viewMtx = Matrix4x4::makeTranslate(Vec3(side, 0.f, forward)) * viewMtx;
@@ -133,6 +133,8 @@ public:
    void setCamInternals(float fovY, UInt32 width, UInt32 height, float nearD, float farD);
 
    void update(const Vec3& eye, const Vec3& lookAt, const Vec3& up);
+
+   void print() const;
 
 ////////////////////////////////////////////////////////////////
 

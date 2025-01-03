@@ -11,7 +11,8 @@
 
 
 Plane::Plane()
-: d(0.f)
+: normal()
+, d(0.f)
 {}
 
 
@@ -57,5 +58,5 @@ void Plane::print()
 {
 	printf("Plane(");
    normal.print();
-   printf("# %f)",d);
+   printf("# %f)", d);
 }

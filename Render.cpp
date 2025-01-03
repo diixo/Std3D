@@ -171,7 +171,7 @@ void drawNormals(const FrustumG& frustum)
 {
    Vec3 a,b;
 
-   const float nrml = 1.f;
+   const float nrml = 0.25f;
 
    glBegin(GL_LINES);
    glColor4f(1.f, 1.f, 1.f, 1.f);
@@ -179,38 +179,38 @@ void drawNormals(const FrustumG& frustum)
    // near
    a = (frustum.mNTR + frustum.mNTL + frustum.mNBR + frustum.mNBL) * nrml;
    b = a + frustum.mClipPlanes[FrustumG::P_NEAR].normal;
-   glVertex3f(a.x,a.y,a.z);
-   glVertex3f(b.x,b.y,b.z);
+   glVertex3f(a.x, a.y, a.z);
+   glVertex3f(b.x, b.y, b.z);
 
    // far
    a = (frustum.mFTR + frustum.mFTL + frustum.mFBR + frustum.mFBL) * nrml;
    b = a + frustum.mClipPlanes[FrustumG::P_FAR].normal;
-   glVertex3f(a.x,a.y,a.z);
-   glVertex3f(b.x,b.y,b.z);
+   glVertex3f(a.x, a.y, a.z);
+   glVertex3f(b.x, b.y, b.z);
 
    // left
    a = (frustum.mFTL + frustum.mFBL + frustum.mNBL + frustum.mNTL) * nrml;
    b = a + frustum.mClipPlanes[FrustumG::P_LEFT].normal;
-   glVertex3f(a.x,a.y,a.z);
-   glVertex3f(b.x,b.y,b.z);
+   glVertex3f(a.x, a.y, a.z);
+   glVertex3f(b.x, b.y, b.z);
 
    // right
    a = (frustum.mFTR + frustum.mNBR + frustum.mFBR + frustum.mNTR) * nrml;
    b = a + frustum.mClipPlanes[FrustumG::P_RIGHT].normal;
-   glVertex3f(a.x,a.y,a.z);
-   glVertex3f(b.x,b.y,b.z);
+   glVertex3f(a.x, a.y, a.z);
+   glVertex3f(b.x, b.y, b.z);
 
    // top
    a = (frustum.mFTR + frustum.mFTL + frustum.mNTR + frustum.mNTL) * nrml;
    b = a + frustum.mClipPlanes[FrustumG::P_TOP].normal;
-   glVertex3f(a.x,a.y,a.z);
-   glVertex3f(b.x,b.y,b.z);
+   glVertex3f(a.x, a.y, a.z);
+   glVertex3f(b.x, b.y, b.z);
 
    // bottom
    a = (frustum.mFBR + frustum.mFBL + frustum.mNBR + frustum.mNBL) * nrml;
    b = a + frustum.mClipPlanes[FrustumG::P_BOTTOM].normal;
-   glVertex3f(a.x,a.y,a.z);
-   glVertex3f(b.x,b.y,b.z);
+   glVertex3f(a.x, a.y, a.z);
+   glVertex3f(b.x, b.y, b.z);
 
    glEnd();
 }

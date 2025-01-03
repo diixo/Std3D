@@ -243,6 +243,11 @@ void keyboard(unsigned char a, int x, int y)
       case 'F':
          frustumOn = !frustumOn;
          break;
+
+      case 'p':
+      case 'P':
+         frustum.print();
+         break;
       
       case 27: 
          exit(0);

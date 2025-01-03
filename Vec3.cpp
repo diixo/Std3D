@@ -103,9 +103,9 @@ float Vec3::square() const
 // For debug pruposes: Prints a vector
 // -----------------------------------------------------------------------
 
-void Vec3::print()
+void Vec3::print(const char* name) const
 {
-	printf("Vec3(%f, %f, %f)",x, y, z);
+	printf("%s Vec3(%f, %f, %f)\n", name, x, y, z);
 }
 
 

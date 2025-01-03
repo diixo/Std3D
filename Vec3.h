@@ -58,7 +58,7 @@ public:
 
    Vec3 getMin(const Vec3& v) const;
 
-   void  print();
+   void print(const char* name="") const;
 
    bool operator == (const Vec3& rv) const;
 
