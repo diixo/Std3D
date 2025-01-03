@@ -18,7 +18,7 @@
 
 
 float nearP = 1.0f, farP = 100.0f;
-float angle = 45.f, ratio= 1.f;
+float angle = 45.f, ratio= 1.f, farF = 15.f;
 
 int frame = 0, timebase = 0;
 
@@ -55,7 +55,7 @@ void changeSize(int w, int h)
    // Set the correct perspective.
    gluPerspective(30.f, ratio, nearP, farP);
 
-   frustum.setCamInternals(angle, w, h, nearP, 15);
+   frustum.setCamInternals(angle, w, h, nearP, farF);
 }
 
 
@@ -278,7 +278,7 @@ void viewer(int argc, char **argv)
 
    //glEnable(GL_CULL_FACE);
 
-   frustum.setCamInternals(angle, 640, 640, nearP, 20.f);
+   frustum.setCamInternals(angle, 640, 640, nearP, farF);
 
    frustum.setPosition(p, l, u);
 
