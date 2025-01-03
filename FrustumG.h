@@ -130,7 +130,7 @@ public:
 
    FrustumG();
 
-   void setCamInternals(float angle, UInt32 width, UInt32 height, float nearD, float farD);
+   void setCamInternals(float fovY, UInt32 width, UInt32 height, float nearD, float farD);
 
    void update(const Vec3& eye, const Vec3& lookAt, const Vec3& up);
 
@@ -146,9 +146,9 @@ public:
 
    Vec3 mNTL, mNTR, mNBL, mNBR, mFTL, mFTR, mFBL, mFBR;   ///< frustum pyramid points
 
-   float mNearD, mFarD, mRatio, mAngle;            ///< camera configuration
+   float mNearD, mFarD, mRatio, mFovY;            ///< camera configuration
 
-   float NW, NH, FW, FH;
+   float mNW, mNH, mFW, mFH;
 
 };
 

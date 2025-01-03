@@ -11,59 +11,59 @@
 
 
 FrustumG::FrustumG()
-: mNearD(0.f), mFarD(0.f), mRatio(0.f), mAngle(0.f)
-, NW(0.f), NH(0.f), FW(0.f), FH(0.f)
+: mNearD(0.f), mFarD(0.f), mRatio(0.f), mFovY(0.f)
+, mNW(0.f), mNH(0.f), mFW(0.f), mFH(0.f)
 {}
 
 
-void FrustumG::setCamInternals(float fov_angle, UInt32 width, UInt32 height, float nearD, float farD)
+void FrustumG::setCamInternals(float fovY, UInt32 width, UInt32 height, float nearD, float farD)
 {
    mRatio = float(width)/float(height);
-   mAngle = fov_angle;
+   mFovY = fovY;
    mNearD = nearD;
    mFarD = farD;
 
-   float tang = (float)tan(ANG2RAD * mAngle * 0.5);
+   float tang = (float)tan(ANG2RAD * mFovY * 0.5);
 
-   NH = mNearD * tang;
-   NW = NH * mRatio;
-   FH = mFarD * tang;
-   FW = FH * mRatio;
+   mNH = mNearD * tang;
+   mNW = mNH * mRatio;
+   mFH = mFarD * tang;
+   mFW = mFH * mRatio;
 }
 
 
 void FrustumG::update(const Vec3& eye, const Vec3& look, const Vec3& up)
 {
-   Vec3 vDir = look - eye;
-   vDir.normalize();
+   Vec3 z = eye - look;
+   z.normalize();
 
-   Vec3 vRight = Vec3::cross(up, vDir);
-   vRight.normalize();
+   Vec3 x = Vec3::cross(z, up);
+   x.normalize();
 
-   Vec3 vUp = Vec3::cross(vDir, vRight);
-   vUp.normalize();
+   Vec3 y = Vec3::cross(x, z);
+   y.normalize();
 
 ////////////////////////////////////////////////////////////////
 
-   Vec3 nc = eye + vDir * mNearD; // near clip, set by view-direction
-   Vec3 fc = eye + vDir * mFarD;  // far clip, set by view-direction
+   const Vec3 nc = eye - z * mNearD;   // near clip, set by view-direction
+   const Vec3 fc = eye - z * mFarD;    // far clip, set by view-direction
 
-   mNTL = nc + vUp * NH - vRight * NW;
-   mNTR = nc + vUp * NH + vRight * NW;
-   mNBL = nc - vUp * NH - vRight * NW;
-   mNBR = nc - vUp * NH + vRight * NW;
+   mNTL = nc + y * mNH - x * mNW;
+   mNTR = nc + y * mNH + x * mNW;
+   mNBL = nc - y * mNH - x * mNW;
+   mNBR = nc - y * mNH + x * mNW;
 
-   mFTL = fc + vUp * FH - vRight * FW;
-   mFTR = fc + vUp * FH + vRight * FW;
-   mFBL = fc - vUp * FH - vRight * FW;
-   mFBR = fc - vUp * FH + vRight * FW;
+   mFTL = fc + y * mFH - x * mFW;
+   mFTR = fc + y * mFH + x * mFW;
+   mFBL = fc - y * mFH - x * mFW;
+   mFBR = fc - y * mFH + x * mFW;
 
-   mClipPlanes[P_TOP]    = Plane(mFTL, mNTL, mNTR);
-   mClipPlanes[P_BOTTOM] = Plane(mFBR, mNBR, mNBL);
-   mClipPlanes[P_LEFT]   = Plane(mFBL, mNBL, mNTL);
-   mClipPlanes[P_RIGHT]  = Plane(mFBR, mNTR, mNBR);
-   mClipPlanes[P_NEAR]   = Plane(mNBR, mNTR, mNTL);
-   mClipPlanes[P_FAR]    = Plane(mFBL, mFTL, mFTR);
+   mClipPlanes[P_TOP]    = Plane(mNTL, mFTL, mNTR);
+   mClipPlanes[P_BOTTOM] = Plane(mNBR, mFBR, mNBL);
+   mClipPlanes[P_LEFT]   = Plane(mNBL, mFBL, mNTL);
+   mClipPlanes[P_RIGHT]  = Plane(mNTR, mFBR, mNBR);
+   mClipPlanes[P_NEAR]   = Plane(mNTR, mNBR, mNTL);
+   mClipPlanes[P_FAR]    = Plane(mFTL, mFBL, mFTR);
 }
 
 

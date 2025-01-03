@@ -27,8 +27,8 @@ int spheresDrawn = 0;
 int spheresTotal = 0;
 
 
-CPosition position(10.f, 0.f, 75.f);
-CMovement movement(Vec3(0.f, 10.f, -75.f), Vec3(), Vec3(0.f, 1.f, 0.f));
+CPosition position(10.f, 0.f, -75.f);
+CMovement movement(Vec3(0.f, 10.f, 75.f), Vec3(), Vec3(0.f, 1.f, 0.f));
 
 bool mode = true;
 Vec3 p(0,0,-5), l(0,0,0), u(0,1,0);
