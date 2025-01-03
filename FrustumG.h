@@ -136,9 +136,9 @@ public:
 
 ////////////////////////////////////////////////////////////////
 
-   int pointInFrustum   (const Vec3& point) const;
-   int sphereInFrustum  (const Vec3& center, float radius) const;
-   int boxInFrustum     (const AABox& box) const;
+   bool pointInFrustum(const Vec3& point) const;
+   int sphereInFrustum(const Vec3& center, float radius) const;
+   int boxInFrustum   (const AABox& box) const;
 
 //protected:
 

@@ -71,7 +71,7 @@ void render()
       for(int k = -40; k < 40; k+=4)
       {
          spheresTotal++;
-         Vec3 a(i,0,k);
+         Vec3 a(i, 0, k);
          if (!frustumOn || (frustum.sphereInFrustum(a, 0.5) == FrustumG::INSIDE))
          {
             ++cntr;

@@ -222,7 +222,7 @@ void drawAxes()
    float offset = 1.5;
 
    glBegin(GL_LINE_STRIP);
-   glColor4f(1.f, 0.5f, 0.f, 1.f);  // X-axis
+   glColor4f(1.f, 0.f, 0.f, 1.f);   // X-axis
    glVertex3f(0, 0, 0);
    glVertex3f(offset, 0, 0);
    glEnd();

@@ -67,15 +67,14 @@ void FrustumG::update(const Vec3& eye, const Vec3& look, const Vec3& up)
 }
 
 
-int FrustumG::pointInFrustum(const Vec3& p) const
+bool FrustumG::pointInFrustum(const Vec3& p) const
 {
-   int result = INSIDE;
    for(int i = 0; i < P_AMOUNT; i++)
    {
-      if (mClipPlanes[i].distance(p) < 0)
-         return OUTSIDE;
+      if (mClipPlanes[i].distance(p) < 0.f)
+         return false;
    }
-   return(result);
+   return true;
 }
 
 
@@ -101,9 +100,9 @@ int FrustumG::boxInFrustum(const AABox& box) const
    int result = INSIDE;
    for(int i = 0; i < P_AMOUNT; i++)
    {
-      if (mClipPlanes[i].distance(box.getVertexP(mClipPlanes[i].normal)) < 0)
+      if (mClipPlanes[i].distance(box.getVertexP(mClipPlanes[i].normal)) < 0.f)
          return OUTSIDE;
-      else if (mClipPlanes[i].distance(box.getVertexN(mClipPlanes[i].normal)) < 0)
+      else if (mClipPlanes[i].distance(box.getVertexN(mClipPlanes[i].normal)) < 0.f)
          result =  INTERSECT;
    }
    return(result);
