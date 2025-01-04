@@ -234,15 +234,16 @@ void drawAxes()
    glVertex3f(0, 0, offset);
 
    glEnd();
-   glEnable(GL_CULL_FACE);
+   glDisable(GL_CULL_FACE);
 }
 
 
-void drawFrustum(const FrustumG& frustum)
+void drawFrustum(const FrustumG& frustum, bool render_axes)
 {
    //drawPoints(frustum);
    drawEdges(frustum);
-   drawPlanes(frustum);
    drawNormals(frustum);
+   if (render_axes) drawAxes();
+   drawPlanes(frustum);
 }
 

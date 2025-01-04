@@ -108,8 +108,7 @@ void render()
       }
    }
 
-   drawAxes();
-   drawFrustum(frustum);
+   drawFrustum(frustum, !mode);
 }
 
 
@@ -147,7 +146,7 @@ void renderScene(void)
       fps = frame*1000.0/(time-timebase);
       timebase = time;
       frame = 0;
-      sprintf_s(title, "Spheres_Drawn=%d, Total_Spheres=%d, FPS=%.2f", spheresDrawn, spheresTotal, fps);
+      sprintf_s(title, "Spheres( Drawn=%d, Total=%d ) FPS=%.2f, FrustumMode=%d", spheresDrawn, spheresTotal, fps, int(mode));
       glutSetWindowTitle(title);
    }
 
