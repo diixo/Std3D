@@ -15,18 +15,33 @@
 #include "AABox.h"
 
 
+// Orbital position
 struct CPosition
 {
    CPosition::CPosition(const float pitch, const float yaw, const float radius)
-      : camPitch(pitch)
-      , worldYaw(yaw)
-      , movement(radius)
+      : mPitch(pitch)
+      , mYaw(yaw)
+      , mRadius(radius)
    {
    }
 
-   float camPitch;
-   float worldYaw;
-   float movement;
+   inline
+   CPosition& operator += (float increase)
+   {
+      mRadius = maximum(0.f, mRadius + increase);
+      return *this;
+   }
+
+   inline
+   CPosition& operator -= (float increase)
+   {
+      mRadius = maximum(0.f, mRadius - increase);
+      return *this;
+   }
+
+   float mPitch;
+   float mYaw;
+   float mRadius;
 
    Matrix4x4 calculateView() const;
 };
@@ -35,13 +50,13 @@ struct CPosition
 inline
 Matrix4x4 CPosition::calculateView() const
 {
-   const Vec3 eye    (0.f, 0.f, -movement);
+   const Vec3 eye    (0.f, 0.f, mRadius);
    const Vec3 up     (0.f, 1.f, 0.f);
    const Vec3 lookAt (0.f, 0.f, 0.f);  // always look into origin(0,0,0).
 
    Matrix4x4 viewMtx          = Matrix4x4::makeLookAt(eye, lookAt, up); // final view matrix.
-   Matrix4x4 rotateRefCam     = Matrix4x4::makeRotateX(camPitch);       // camera coordinate-system rotation.
-   Matrix4x4 rotateRefWorld   = Matrix4x4::makeRotateY(worldYaw);       // world coordinate-system rotation.
+   Matrix4x4 rotateRefCam     = Matrix4x4::makeRotateX(mPitch);       // camera coordinate-system rotation.
+   Matrix4x4 rotateRefWorld   = Matrix4x4::makeRotateY(mYaw);       // world coordinate-system rotation.
 
    // Calculate pitch around origin(0,0,0) in camera-coordinate system.
    {

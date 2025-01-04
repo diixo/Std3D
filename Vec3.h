@@ -74,4 +74,10 @@ inline T minimum(const T left, const T right)
    return (left < right) ? left : right;
 }
 
+template<typename T>
+inline T maximum(const T left, const T right)
+{
+   return (left > right) ? left : right;
+}
+
 #endif

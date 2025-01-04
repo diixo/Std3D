@@ -165,14 +165,14 @@ void keyboard(unsigned char a, int x, int y)
    {
       case 'w':
       case 'W':
-         position.camPitch += speed;
+         position.mPitch += speed;
          movement.pitch += speed;
          //view.camPitch     += speed;
          break;
 
       case 's':
       case 'S':
-         position.camPitch -= speed;
+         position.mPitch -= speed;
          movement.pitch -= speed;
          //view.camPitch     -= speed;
          break;
@@ -191,13 +191,13 @@ void keyboard(unsigned char a, int x, int y)
 
       case 'a':
       case 'A':
-         position.worldYaw -= speed;
+         position.mYaw -= speed;
          //view.worldYaw     -= speed;
          break;
 
       case 'd':
       case 'D':
-         position.worldYaw += speed;
+         position.mYaw += speed;
          //view.worldYaw     += speed;
          break;
 
@@ -212,13 +212,13 @@ void keyboard(unsigned char a, int x, int y)
          break;
 
       case '+':
-         position.movement -= 2.f*speed;
+         position -= 2.f*speed;
          movement.forward  += speed;
          //view.movement     -= 2.f*speed;
          break;
 
       case '-':
-         position.movement += 2.f*speed;
+         position += 2.f*speed;
          movement.forward  -= speed;
          //view.movement     += 2.f*speed;
          break;
@@ -280,8 +280,6 @@ void viewer(int argc, char **argv)
    glShadeModel(GL_SMOOTH);
    glEnable(GL_BLEND);
    glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);	
-
-   //glEnable(GL_CULL_FACE);
 
    frustum.setCamInternals(angle, 640, 640, nearP, farF);
 
