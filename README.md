@@ -1,5 +1,8 @@
 # Std3D
 
+OpenGL small math library
+
+
 <div align="left" width="540" height="540">
   <img src="/imgs/frustum-1.png">
 </div>
