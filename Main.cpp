@@ -17,7 +17,7 @@
 #include <time.h>
 
 
-float nearP = 1.0f, farP = 100.0f;
+float nearP = 1.0f, farP = 100.0f, Radius = 60.f;
 float angle = 45.f, ratio= 1.f, farF = 15.f;
 
 int frame = 0, timebase = 0;
@@ -27,8 +27,8 @@ int spheresDrawn = 0;
 int spheresTotal = 0;
 
 
-CPosition position(10.f, 0.f, 75.f);
-CMovement movement(Vec3(0.f, 10.f, 75.f), Vec3(), Vec3(0.f, 1.f, 0.f));
+CPosition position(10.f, 0.f, Radius); // (11.f, 63.f, 60.f)
+CMovement movement(Vec3(0.f, 10.f, Radius), Vec3(), Vec3(0.f, 1.f, 0.f));
 
 bool mode = true;
 Vec3 p(0,0,-5), l(0,0,0), u(0,1,0);
@@ -146,7 +146,8 @@ void renderScene(void)
       fps = frame*1000.0/(time-timebase);
       timebase = time;
       frame = 0;
-      sprintf_s(title, "Spheres( Drawn=%d, Total=%d ) FPS=%.2f, FrustumMode=%d", spheresDrawn, spheresTotal, fps, int(mode));
+      sprintf_s(title, "Spheres( Drawn=%d, Total=%d ) FPS=%.2f, FrustumMode=%d, R=%.2f",
+         spheresDrawn, spheresTotal, fps, int(mode), position.mRadius);
       glutSetWindowTitle(title);
    }
 
@@ -233,8 +234,8 @@ void keyboard(unsigned char a, int x, int y)
       case 'M':
          {
             mode = !mode;
-            position = CPosition(10.f, 0.f, 75.f);
-            movement = CMovement(Vec3(0.f, 10.f, 75.f), Vec3(), Vec3(0.f, 1.f, 0.f));
+            position = CPosition(10.f, 0.f, Radius);
+            movement = CMovement(Vec3(0.f, 10.f, Radius), Vec3(), Vec3(0.f, 1.f, 0.f));
          }
          break;
 
