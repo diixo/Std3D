@@ -216,25 +216,23 @@ void drawNormals(const FrustumG& frustum)
 
 void drawAxes()
 {
-   glEnable(GL_CULL_FACE);
    float offset = 1.5;
 
-   glBegin(GL_LINE_STRIP);
+   glEnable(GL_CULL_FACE);
+   glBegin(GL_LINES);
+
    glColor4f(1.f, 0.f, 0.f, 1.f);   // X-axis
    glVertex3f(0, 0, 0);
    glVertex3f(offset, 0, 0);
-   glEnd();
 
-   glBegin(GL_LINE_STRIP);
    glColor4f(0.5f, 1.f, 0.f, 1.f);  // Y-axis
    glVertex3f(0, 0, 0);
    glVertex3f(0, offset, 0);
-   glEnd();
 
-   glBegin(GL_LINE_STRIP);
    glColor4f(0.f, 0.f, 1.f, 1.f);   // Z-axis
    glVertex3f(0, 0, 0);
    glVertex3f(0, 0, offset);
+
    glEnd();
    glDisable(GL_CULL_FACE);
 }
