@@ -43,12 +43,12 @@ struct CPosition
    float mYaw;
    float mRadius;
 
-   Matrix4x4 calculateView() const;
+   Matrix4x4 calculateLookAt() const;
 };
 
 
 inline
-Matrix4x4 CPosition::calculateView() const
+Matrix4x4 CPosition::calculateLookAt() const
 {
    // Vnew = Mr * (Mt * V)
    // Vnew = (Mr * Mt) * V = Mtransform * V
@@ -89,11 +89,11 @@ public:
    float forward; // movement ahead
    float side;    // movement aside
 
-   Matrix4x4 calculateView() const;
+   Matrix4x4 calculateLookAt() const;
 };
 
 inline
-Matrix4x4 CMovement::calculateView() const
+Matrix4x4 CMovement::calculateLookAt() const
 {
    Matrix4x4 viewMtx      = Matrix4x4::makeLookAt(eye, lookAt, up);                      // final view matrix.
    Matrix4x4 rotateRefCam = Matrix4x4::makeRotateX(pitch) * Matrix4x4::makeRotateY(yaw); // camera coordinate-system rotation.

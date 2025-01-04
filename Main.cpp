@@ -125,12 +125,12 @@ void renderScene(void)
 
    if (mode)
    {
-      Matrix4x4 viewMtx = position.calculateView();
+      Matrix4x4 viewMtx = position.calculateLookAt();
       glLoadMatrixf(viewMtx.m);
    }
    else
    {
-      Matrix4x4 viewMtx = movement.calculateView();
+      Matrix4x4 viewMtx = movement.calculateLookAt();
       glLoadMatrixf(viewMtx.m);
    }
 
