@@ -31,7 +31,7 @@ CPosition position(10.f, 0.f, Radius); // (11.f, 63.f, 60.f)
 CMovement movement(Vec3(0.f, 10.f, Radius), Vec3(), Vec3(0.f, 1.f, 0.f));
 
 bool mode = true;
-Vec3 p(0,0,-5), l(0,0,0), u(0,1,0);
+Vec3 p(0,0,-5), l(0,0,0), u(0,1,0); // pos,lookAt,up
 
 FrustumG frustum;
 
@@ -114,7 +114,7 @@ void render()
 
 void renderScene(void)
 {
-   char title[80];
+   char title[100];
    float fps,time;
 
    glClearColor(0.f, 0.f, 0.f, 0.f);
@@ -146,8 +146,8 @@ void renderScene(void)
       fps = frame*1000.0/(time-timebase);
       timebase = time;
       frame = 0;
-      sprintf_s(title, "Spheres( Drawn=%d, Total=%d ) FPS=%.2f, FrustumMode=%d, R=%.2f",
-         spheresDrawn, spheresTotal, fps, int(mode), position.mRadius);
+      sprintf_s(title, "Spheres( Drawn=%d, Total=%d ) FPS=%.2f, FrustumMode=%d, R=%.2f, pitch=%.2f, yaw=%.2f",
+         spheresDrawn, spheresTotal, fps, int(mode), position.mRadius, position.mPitch, position.mYaw);
       glutSetWindowTitle(title);
    }
 
@@ -192,13 +192,11 @@ void keyboard(unsigned char a, int x, int y)
       case 'a':
       case 'A':
          position.mYaw -= speed;
-         //view.worldYaw -= speed;
          break;
 
       case 'd':
       case 'D':
          position.mYaw += speed;
-         //view.worldYaw += speed;
          break;
 
       case 't':

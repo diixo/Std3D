@@ -118,7 +118,7 @@ void drawPlanes(const FrustumG& frustum)
 
    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-   glColor4f(0.5f, 0.5f, 0.5f, 0.3f);
+   glColor4f(0.5f, 0.5f, 0.5f, 0.4f);
 
    glBegin(GL_QUADS);
 
