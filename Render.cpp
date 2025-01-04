@@ -108,7 +108,7 @@ void drawEdges(const FrustumG& frustum)
    glVertex3f(frustum.mFBR.x, frustum.mFBR.y, frustum.mFBR.z);
 
    glEnd();
-   glDisable(GL_CULL_FACE);
+   glEnable(GL_CULL_FACE);
 }
 
 
@@ -166,7 +166,7 @@ void drawPlanes(const FrustumG& frustum)
 
 void drawNormals(const FrustumG& frustum)
 {
-   Vec3 a,b;
+   Vec3 a, b;
 
    glDisable(GL_CULL_FACE);
    glBegin(GL_LINES);
@@ -234,13 +234,13 @@ void drawAxes()
    glVertex3f(0, 0, offset);
 
    glEnd();
-   glDisable(GL_CULL_FACE);
+   glEnable(GL_CULL_FACE);
 }
 
 
 void drawFrustum(const FrustumG& frustum)
 {
-   drawPoints(frustum);
+   //drawPoints(frustum);
    drawEdges(frustum);
    drawPlanes(frustum);
    drawNormals(frustum);
