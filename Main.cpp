@@ -27,7 +27,7 @@ int spheresDrawn = 0;
 int spheresTotal = 0;
 
 
-CPosition position(10.f, 0.f, -75.f);
+CPosition position(10.f, 0.f, 75.f);
 CMovement movement(Vec3(0.f, 10.f, 75.f), Vec3(), Vec3(0.f, 1.f, 0.f));
 
 bool mode = true;
@@ -167,14 +167,14 @@ void keyboard(unsigned char a, int x, int y)
       case 'W':
          position.mPitch += speed;
          movement.pitch += speed;
-         //view.camPitch     += speed;
+         //view.camPitch += speed;
          break;
 
       case 's':
       case 'S':
          position.mPitch -= speed;
          movement.pitch -= speed;
-         //view.camPitch     -= speed;
+         //view.camPitch -= speed;
          break;
 
       case 'q':
@@ -192,13 +192,13 @@ void keyboard(unsigned char a, int x, int y)
       case 'a':
       case 'A':
          position.mYaw -= speed;
-         //view.worldYaw     -= speed;
+         //view.worldYaw -= speed;
          break;
 
       case 'd':
       case 'D':
          position.mYaw += speed;
-         //view.worldYaw     += speed;
+         //view.worldYaw += speed;
          break;
 
       case 't':
@@ -212,15 +212,15 @@ void keyboard(unsigned char a, int x, int y)
          break;
 
       case '+':
-         position -= 2.f*speed;
-         movement.forward  += speed;
-         //view.movement     -= 2.f*speed;
+         position -= speed;
+         movement.forward += speed;
+         //view.movement -= 2.f*speed;
          break;
 
       case '-':
-         position += 2.f*speed;
-         movement.forward  -= speed;
-         //view.movement     += 2.f*speed;
+         position += speed;
+         movement.forward -= speed;
+         //view.movement += 2.f*speed;
          break;
 
       case 'r':
@@ -235,7 +235,7 @@ void keyboard(unsigned char a, int x, int y)
          {
             mode = !mode;
             position = CPosition(10.f, 0.f, 75.f);
-            movement = CMovement(Vec3(0.f, 10.f, -75.f), Vec3(), Vec3(0.f, 1.f, 0.f));
+            movement = CMovement(Vec3(0.f, 10.f, 75.f), Vec3(), Vec3(0.f, 1.f, 0.f));
          }
          break;
 
