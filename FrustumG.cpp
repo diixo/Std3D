@@ -59,12 +59,12 @@ void FrustumG::update(const Vec3& eye, const Vec3& look, const Vec3& up)
    mFBL = fc - y * mFH - x * mFW;
    mFBR = fc - y * mFH + x * mFW;
 
-   mClipPlanes[P_TOP]    = Plane(mNTL, mFTL, mNTR);
-   mClipPlanes[P_BOTTOM] = Plane(mNBR, mFBR, mNBL);
-   mClipPlanes[P_LEFT]   = Plane(mNBL, mFBL, mNTL);
-   mClipPlanes[P_RIGHT]  = Plane(mNTR, mFBR, mNBR);
-   mClipPlanes[P_NEAR]   = Plane(mNTR, mNBR, mNTL);
-   mClipPlanes[P_FAR]    = Plane(mFTL, mFBL, mFTR);
+   mClipPlanes[P_TOP]    = Plane(mFTL, mNTL, mNTR);
+   mClipPlanes[P_BOTTOM] = Plane(mFBR, mNBR, mNBL);
+   mClipPlanes[P_LEFT]   = Plane(mFBL, mNBL, mNTL);
+   mClipPlanes[P_RIGHT]  = Plane(mFBR, mNTR, mNBR);
+   mClipPlanes[P_NEAR]   = Plane(mNBR, mNTR, mNTL);
+   mClipPlanes[P_FAR]    = Plane(mFBL, mFTL, mFTR);
 }
 
 
@@ -82,7 +82,7 @@ bool FrustumG::pointInFrustum(const Vec3& p) const
 int FrustumG::sphereInFrustum(const Vec3& center, float radius) const
 {
    int result = INSIDE;
-   float distance;
+   float distance = 0.f;
 
    for(int i = 0; i < P_AMOUNT; i++)
    {
