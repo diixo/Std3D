@@ -167,26 +167,22 @@ void keyboard(unsigned char a, int x, int y)
       case 'W':
          position.mPitch += speed;
          movement.pitch += speed;
-         //view.camPitch += speed;
          break;
 
       case 's':
       case 'S':
          position.mPitch -= speed;
          movement.pitch -= speed;
-         //view.camPitch -= speed;
          break;
 
       case 'q':
       case 'Q':
          movement.yaw -= speed;
-         //view.camYaw -= speed;
          break;
 
       case 'e':
       case 'E':
          movement.yaw += speed;
-         //view.camYaw += speed;
          break;
 
       case 'a':
@@ -223,9 +219,9 @@ void keyboard(unsigned char a, int x, int y)
 
       case 'r':
       case 'R':
-         p.set(0,0,-5);
-         l.set(0,0,0);
-         u.set(0,1,0);
+         p.set(0, 0, -5);
+         l.set(0, 0, 0);
+         u.set(0, 1, 0);
          break;
 
       case 'm':

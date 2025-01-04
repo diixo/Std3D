@@ -147,7 +147,6 @@ void drawPlanes(const FrustumG& frustum)
    glVertex3f(frustum.mFTR.x, frustum.mFTR.y, frustum.mFTR.z);
 
    //left mClipPlanesane
-
    glVertex3f(frustum.mNTL.x, frustum.mNTL.y, frustum.mNTL.z);
    glVertex3f(frustum.mNBL.x, frustum.mNBL.y, frustum.mNBL.z);
    glVertex3f(frustum.mFBL.x, frustum.mFBL.y, frustum.mFBL.z);
