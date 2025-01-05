@@ -50,17 +50,19 @@ struct CPosition
 inline
 Matrix4x4 CPosition::calculateLookAt() const
 {
-   // Vnew = Mr * (Mt * V)
-   // Vnew = (Mr * Mt) * V = Mtransform * V
-
-   // V = Mtransform' * Vnew
-   // Mtansform' = (Mr * Mt)' = Mt' * Mr'
+   // Rotations: cameraPitch, worldYaw
+   // Mview = Mpitch * Myaw * T
+   // Vworld = (Mview) * Vcamera = Mtransform * Vcamera
+   // Vcamera = Mview' * Vworld
+   // Mview' = T' * Myaw' * Mpitch' = T^{-1} * Myaw^T * Mpitch^T
+   ////////////////////////////////////////////////////////////////////////////////
+   // Optimization: M1' * M2' = M2 * M1
+   // Mview' = T' * Myaw' * Mpitch' = T' * (Myaw' * Mpitch') = T' * (Mpitch * Myaw)
 
    const Vec3 eye(0.f, 0.f, mRadius);
-   Matrix4x4 Mrot = Matrix4x4::makeRotateX(mPitch) * Matrix4x4::makeRotateY(mYaw);
 
    // return Mt' * Mr'
-   return Matrix4x4::makeTranslate(-eye) * Mrot;
+   return Matrix4x4::makeTranslate(-eye) * (Matrix4x4::makeRotateX(mPitch) * Matrix4x4::makeRotateY(mYaw));
 }
 
 

@@ -27,7 +27,7 @@ int spheresDrawn = 0;
 int spheresTotal = 0;
 
 
-CPosition position(10.f, 0.f, Radius); // (11.f, 63.f, 60.f)
+CPosition position(10.f, 60.f, Radius); // (11.f, 63.f, 60.f)
 CMovement movement(Vec3(0.f, 10.f, Radius), Vec3(), Vec3(0.f, 1.f, 0.f));
 
 bool mode = true;
@@ -146,7 +146,7 @@ void renderScene(void)
       fps = frame*1000.0/(time-timebase);
       timebase = time;
       frame = 0;
-      sprintf_s(title, "Spheres( Drawn=%d, Total=%d ) FPS=%.2f, FrustumMode=%d, R=%.2f, pitch=%.2f, yaw=%.2f",
+      sprintf_s(title, "Spheres( Drawn=%d, Total=%d ) FPS=%.1f, Mode=%d, R=%.1f, pitch=%.2f, yaw=%.2f",
          spheresDrawn, spheresTotal, fps, int(mode), position.mRadius, position.mPitch, position.mYaw);
       glutSetWindowTitle(title);
    }
@@ -228,7 +228,7 @@ void keyboard(unsigned char a, int x, int y)
       case 'M':
          {
             mode = !mode;
-            position = CPosition(10.f, 0.f, Radius);
+            position = CPosition(10.f, 60.f, Radius);
             movement = CMovement(Vec3(0.f, 10.f, Radius), Vec3(), Vec3(0.f, 1.f, 0.f));
          }
          break;
