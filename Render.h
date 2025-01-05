@@ -12,7 +12,7 @@
 
 void drawPoints(const FrustumG& frustum);
 
-void drawLines(const FrustumG& frustum);
+void drawEdges(const FrustumG& frustum);
 
 void drawPlanes(const FrustumG& frustum);
 
