@@ -220,7 +220,7 @@ void drawAxes()
    glEnable(GL_CULL_FACE);
    glBegin(GL_LINES);
 
-   glColor4f(1.f, 0.f, 0.f, 1.f);   // X-axis
+   glColor4f(1.f, 0.3f, 0.f, 1.f);   // X-axis
    glVertex3f(0, 0, 0);
    glVertex3f(offset, 0, 0);
 
@@ -237,12 +237,11 @@ void drawAxes()
 }
 
 
-void drawFrustum(const FrustumG& frustum, bool render_axes)
+void drawFrustum(const FrustumG& frustum)
 {
    //drawPoints(frustum);
    drawEdges(frustum);
    drawNormals(frustum);
-   if (render_axes) drawAxes();
    drawPlanes(frustum);
 }
 

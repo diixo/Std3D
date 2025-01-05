@@ -18,7 +18,7 @@ void drawPlanes(const FrustumG& frustum);
 
 void drawNormals(const FrustumG& frustum);
 
-void drawFrustum(const FrustumG& frustum, bool draw_axes);
+void drawFrustum(const FrustumG& frustum);
 
 void drawAxes();
 

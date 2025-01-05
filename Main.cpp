@@ -107,8 +107,8 @@ void render()
          }
       }
    }
-
-   drawFrustum(frustum, !mode);
+   drawAxes();
+   drawFrustum(frustum);
 }
 
 
