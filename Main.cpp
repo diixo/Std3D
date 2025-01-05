@@ -206,13 +206,13 @@ void keyboard(unsigned char a, int x, int y)
          break;
 
       case '+':
-         position -= speed;
+         position += speed;
          movement.forward += speed;
          //view.movement -= 2.f*speed;
          break;
 
       case '-':
-         position += speed;
+         position -= speed;
          movement.forward -= speed;
          //view.movement += 2.f*speed;
          break;

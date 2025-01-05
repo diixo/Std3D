@@ -26,16 +26,16 @@ struct CPosition
    }
 
    inline
-   CPosition& operator += (float increase)
+   CPosition& operator += (float value)
    {
-      mRadius = maximum(0.f, mRadius + increase);
+      mRadius = maximum(0.f, mRadius - value);
       return *this;
    }
 
    inline
-   CPosition& operator -= (float increase)
+   CPosition& operator -= (float value)
    {
-      mRadius = maximum(0.f, mRadius - increase);
+      mRadius = maximum(0.f, mRadius + value);
       return *this;
    }
 
