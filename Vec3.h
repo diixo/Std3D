@@ -14,8 +14,8 @@ typedef int Int32;
 typedef unsigned char UInt8;
 typedef char Int8;
 
-//#define ANG2RAD (3.14159265358979323846 / 180.0)
-#define ANG2RAD (3.1415926f / 180.0f)
+#define ANG2RAD (3.14159265358979323846 / 180.0)
+//#define ANG2RAD (3.1415926f / 180.0f)
 
 class Vec3  
 {

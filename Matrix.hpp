@@ -144,7 +144,7 @@ Matrix3x3 Matrix3x3::operator * (const Matrix3x3& b) const
 inline 
 Matrix3x3 Matrix3x3::makeRotateX(const float& angle)
 {
-   const float rad = angle*ANG2RAD;
+   const double rad = angle*ANG2RAD;
    const float Cos = (float)cos(rad);
    const float Sin = (float)sin(rad);
    Matrix3x3 mat;
@@ -158,7 +158,7 @@ Matrix3x3 Matrix3x3::makeRotateX(const float& angle)
 inline 
 Matrix3x3 Matrix3x3::makeRotateY(const float& angle)
 {
-   const float rad = angle*ANG2RAD;
+   const double rad = angle*ANG2RAD;
    const float Cos = (float)cos(rad);
    const float Sin = (float)sin(rad);
    Matrix3x3 mat;
@@ -172,7 +172,7 @@ Matrix3x3 Matrix3x3::makeRotateY(const float& angle)
 inline 
 Matrix3x3 Matrix3x3::makeRotateZ(const float& angle)
 {
-   const float rad = angle*ANG2RAD;
+   const double rad = angle*ANG2RAD;
    const float Cos = (float)cos(rad);
    const float Sin = (float)sin(rad);
    Matrix3x3 mat;
@@ -301,7 +301,7 @@ Matrix4x4 Matrix4x4::makeTranslate(const Vec3& v)
 inline 
 Matrix4x4 Matrix4x4::makeRotateX(const float angle)
 {
-   const float rad = angle*ANG2RAD;
+   const double rad = angle*ANG2RAD;
    const float Cos = (float)cos(rad);
    const float Sin = (float)sin(rad);
    Matrix4x4 mat;
@@ -316,7 +316,7 @@ Matrix4x4 Matrix4x4::makeRotateX(const float angle)
 inline 
 Matrix4x4 Matrix4x4::makeRotateY(const float angle)
 {
-   const float rad = angle*ANG2RAD;
+   const double rad = angle*ANG2RAD;
    const float Cos = (float)cos(rad);
    const float Sin = (float)sin(rad);
    Matrix4x4 mat;
@@ -331,7 +331,7 @@ Matrix4x4 Matrix4x4::makeRotateY(const float angle)
 inline 
 Matrix4x4 Matrix4x4::makeRotateZ(const float angle)
 {
-   const float rad = angle*ANG2RAD;
+   const double rad = angle*ANG2RAD;
    const float Cos = (float)cos(rad);
    const float Sin = (float)sin(rad);
    Matrix4x4 mat;
