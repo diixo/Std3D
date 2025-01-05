@@ -27,7 +27,7 @@ int spheresDrawn = 0;
 int spheresTotal = 0;
 
 
-CPosition position(10.f, 60.f, Radius); // (11.f, 63.f, 60.f)
+CPosition position(10.f, 60.f, Radius);
 CMovement movement(Vec3(0.f, 10.f, Radius), Vec3(), Vec3(0.f, 1.f, 0.f));
 
 bool mode = true;
@@ -165,13 +165,13 @@ void keyboard(unsigned char a, int x, int y)
    {
       case 'w':
       case 'W':
-         position.mPitch += speed;
+         position.mPitch = normalize360(position.mPitch + speed);
          movement.pitch += speed;
          break;
 
       case 's':
       case 'S':
-         position.mPitch -= speed;
+         position.mPitch = normalize360(position.mPitch - speed);
          movement.pitch -= speed;
          break;
 
@@ -187,12 +187,12 @@ void keyboard(unsigned char a, int x, int y)
 
       case 'a':
       case 'A':
-         position.mYaw -= speed;
+         position.mYaw = normalize360(position.mYaw - speed);
          break;
 
       case 'd':
       case 'D':
-         position.mYaw += speed;
+         position.mYaw = normalize360(position.mYaw + speed);
          break;
 
       case 't':
