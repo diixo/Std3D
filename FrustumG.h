@@ -59,10 +59,20 @@ Matrix4x4 CPosition::calculateLookAt() const
    // Optimization: M1' * M2' = M2 * M1
    // Mview' = T' * Myaw' * Mpitch' = T' * (Myaw' * Mpitch') = T' * (Mpitch * Myaw)
 
-   const Vec3 eye(0.f, 0.f, mRadius);
-
    // return Mt' * Mr'
-   return Matrix4x4::makeTranslate(-eye) * (Matrix4x4::makeRotateX(mPitch) * Matrix4x4::makeRotateY(mYaw));
+
+   Matrix4x4 lookAt =
+      Matrix4x4::makeTranslate(Vec3(0.f, 0.f, -mRadius)) *
+      Matrix4x4::makeRotateX(mPitch) *
+      Matrix4x4::makeRotateY(-mYaw);
+
+   /*
+   const Vec3 pos = makeSpherical(mPitch, mYaw, mRadius);
+   Matrix4x4 look = Matrix4x4::makeLookAt(pos, Vec3(), Vec3(0.f, 1.f, 0.f));
+   */
+
+   Matrix4x4 mtx_lookAt = Matrix4x4::makeLookAt(mRadius, mPitch, mYaw, Vec3());
+   return mtx_lookAt;
 }
 
 
