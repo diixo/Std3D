@@ -44,12 +44,12 @@ struct CPosition
    float mRadius;
 
    Matrix4x4 calculateLookAt() const;
-   Matrix4x4 calculateView() const;
+   Matrix4x4 makeLookAt() const;
 };
 
 
 inline
-Matrix4x4 CPosition::calculateView() const
+Matrix4x4 CPosition::makeLookAt() const
 {
    const Vec3 eye(0.f, 0.f, mRadius);
 
@@ -58,9 +58,7 @@ Matrix4x4 CPosition::calculateView() const
    Matrix4x4 viewMtx = Matrix4x4::makeTranslate(-eye) * Matrix4x4::makeRotateX(mPitch);
 
    rotateRefWorld.transpose();
-   viewMtx = viewMtx * rotateRefWorld;
-
-   return viewMtx;
+   return viewMtx * rotateRefWorld;
 }
 
 
@@ -68,26 +66,17 @@ inline
 Matrix4x4 CPosition::calculateLookAt() const
 {
    // the same as current implementation:
-   //return this->calculateView();
+   return this->makeLookAt();
 
-   // Rotations: cameraPitch, worldYaw
-   // Mview = Mpitch * Myaw * T
-   // Vworld = (Mview) * Vcamera = Mtransform * Vcamera
-   // Vcamera = Mview' * Vworld
-   // Mview' = T' * Myaw' * Mpitch' = T^{-1} * Myaw^T * Mpitch^T
+   // the same as current implementation:
+   //return Matrix4x4::makeLookAt(mRadius, mPitch, mYaw, Vec3());
+
    ////////////////////////////////////////////////////////////////////////////////
-   // Optimization: M1' * M2' = M2 * M1
-   // Mview' = T' * Myaw' * Mpitch' = T' * (Myaw' * Mpitch') = T' * (Mpitch * Myaw)
-
-   // return Mt' * Mr'
-
 
    /* no-optimized implementation version:
    const Vec3 pos = makeSpherical(mPitch, mYaw, mRadius);
    return Matrix4x4::makeLookAt(pos, Vec3(), Vec3(0.f, 1.f, 0.f));
    */
-
-   return Matrix4x4::makeLookAt(mRadius, mPitch, mYaw, Vec3());
 }
 
 
