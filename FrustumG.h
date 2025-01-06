@@ -44,29 +44,16 @@ struct CPosition
    float mRadius;
 
    Matrix4x4 calculateLookAt() const;
-   Matrix4x4 makeLookAt() const;
 };
-
-
-inline
-Matrix4x4 CPosition::makeLookAt() const
-{
-   const Vec3 eye(0.f, 0.f, mRadius);
-
-   Matrix4x4 rotateRefWorld = Matrix4x4::makeRotateY(mYaw);
-   rotateRefWorld.transpose();
-
-   return Matrix4x4::makeTranslate(-eye) * Matrix4x4::makeRotateX(mPitch) * rotateRefWorld;
-}
 
 
 inline
 Matrix4x4 CPosition::calculateLookAt() const
 {
    // the same as current implementation:
-   return this->makeLookAt();
+   return Matrix4x4::makeLookAt(mRadius, mPitch, mYaw);
 
-   // the same as current implementation:
+   // the same current implementation:
    //return Matrix4x4::makeLookAt(mRadius, mPitch, mYaw, Vec3());
 
    ////////////////////////////////////////////////////////////////////////////////

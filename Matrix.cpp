@@ -162,6 +162,16 @@ Matrix4x4 Matrix4x4::makeLookAt(const Vec3& eye, const Vec3& lookAt, const Vec3&
 
 Matrix4x4 Matrix4x4::makeLookAt(const float radius, const float pitch, const float yaw)
 {
+   /* The same implementation:
+
+   Matrix4x4 Myaw = Matrix4x4::makeRotateY(mYaw);
+   Myaw.transpose();
+
+   return Matrix4x4::makeTranslate(Vec3(0.f, 0.f, -mRadius)) * Matrix4x4::makeRotateX(mPitch) * Myaw;
+
+   M = M1 * M2 * M3 = M1 * (M2 * M3)
+   */
+
    const double p = pitch * ANG2RAD;
    const double y = yaw * ANG2RAD;
 
@@ -174,17 +184,17 @@ Matrix4x4 Matrix4x4::makeLookAt(const float radius, const float pitch, const flo
    Matrix4x4 mat;
 
    mat[0] = cs_y;
-   mat[1] = sn_p * sn_y;
+   mat[1] = -sn_p * sn_y;
    mat[2] = cs_p * sn_y;
    mat[3] = 0.f;
 
    mat[4] = 0.f;
    mat[5] = cs_p;
-   mat[6] = -sn_p;
+   mat[6] = sn_p;
    mat[7] = 0.f;
 
    mat[8] = -sn_y;
-   mat[9] = sn_p * cs_y;
+   mat[9] = -sn_p * cs_y;
    mat[10] = cs_p * cs_y;
    mat[11] = 0.f;
 
