@@ -62,7 +62,7 @@ Matrix4x4 CPosition::calculateLookAt() const
    // return Mt' * Mr'
 
    Matrix4x4 lookAt =
-      Matrix4x4::makeTranslate(Vec3(0.f, 0.f, -mRadius)) *
+      Matrix4x4::makeTranslate(-Vec3(0.f, 0.f, mRadius)) *
       Matrix4x4::makeRotateX(mPitch) *
       Matrix4x4::makeRotateY(-mYaw);
 
