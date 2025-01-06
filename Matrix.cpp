@@ -175,27 +175,27 @@ Matrix4x4 Matrix4x4::makeLookAt(const float radius, const float pitch, const flo
    const double p = pitch * ANG2RAD;
    const double y = yaw * ANG2RAD;
 
-   const float sn_p = (float)sin(p);
-   const float cs_p = (float)cos(p);
+   const double sn_p = sin(p);
+   const double cs_p = cos(p);
 
-   const float sn_y = (float)sin(y);
-   const float cs_y = (float)cos(y);
+   const double sn_y = sin(y);
+   const double cs_y = cos(y);
 
    Matrix4x4 mat;
 
-   mat[0] = cs_y;
-   mat[1] = -sn_p * sn_y;
-   mat[2] = cs_p * sn_y;
+   mat[0] = (float)cs_y;
+   mat[1] = (float)(-sn_p * sn_y);
+   mat[2] = (float)(cs_p * sn_y);
    mat[3] = 0.f;
 
    mat[4] = 0.f;
-   mat[5] = cs_p;
-   mat[6] = sn_p;
+   mat[5] = (float)cs_p;
+   mat[6] = (float)sn_p;
    mat[7] = 0.f;
 
-   mat[8] = -sn_y;
-   mat[9] = -sn_p * cs_y;
-   mat[10] = cs_p * cs_y;
+   mat[8] = (float)-sn_y;
+   mat[9] = (float)(-sn_p * cs_y);
+   mat[10] = (float)(cs_p * cs_y);
    mat[11] = 0.f;
 
    mat[12] = 0.f;
