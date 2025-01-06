@@ -80,7 +80,7 @@ inline T maximum(const T left, const T right)
    return (left > right) ? left : right;
 }
 
-template<typename T>
+template <typename T>
 inline T normalize360(const T angle)
 {
    if (angle < 0.f)
@@ -89,5 +89,9 @@ inline T normalize360(const T angle)
       return (angle - 360.f);
    return angle;
 }
+
+
+Vec3 makeSpherical(const float rho, const float theta, const float radius);
+
 
 #endif

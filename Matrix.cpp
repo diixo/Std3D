@@ -160,6 +160,40 @@ Matrix4x4 Matrix4x4::makeLookAt(const Vec3& eye, const Vec3& lookAt, const Vec3&
 }
 
 
+Matrix4x4 Matrix4x4::makeLookAt(const float radius, const float pitch, const float yaw, const Vec3& center)
+{
+   const Vec3 right = Matrix4x4::makeRotateY(yaw) * Vec3(1.f, 0.f, 0.f);
+
+   Vec3 dir = makeSpherical(pitch, yaw, radius);
+   dir.normalize();
+
+   Vec3 up = Vec3::cross(dir, right);
+   up.normalize();
+
+   Matrix4x4 view;
+   view.identity();
+
+   // world rotation axis
+   view.m[0] = right.x;
+   view.m[4] = right.y;
+   view.m[8] = right.z;
+
+   view.m[1] = up.x;
+   view.m[5] = up.y;
+   view.m[9] = up.z;
+
+   view.m[2] = dir.x;
+   view.m[6] = dir.y;
+   view.m[10] = dir.z;
+
+   view.m[12] = -center.x;
+   view.m[13] = -center.y;
+   view.m[14] = -center.z - radius;
+
+   return view;
+}
+
+
 void Matrix4x4::invert()
 {
    const float a0 = m[0] * m[5] - m[1] * m[4];

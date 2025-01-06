@@ -127,3 +127,16 @@ bool Vec3::operator == (const Vec3& rv) const
 {
    return ((x == rv.x) && (y == rv.y) && (z == rv.z));
 }
+
+
+Vec3 makeSpherical(const float rho, const float theta, const float radius)
+{
+   const double pitch = rho * ANG2RAD;
+   const double yaw = theta * ANG2RAD;
+
+   return Vec3(
+      radius * (float)(cos(pitch) * sin(yaw)),
+      radius * (float)sin(pitch),
+      radius * (float)(cos(pitch) * cos(yaw))
+   );
+}
