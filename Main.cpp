@@ -159,9 +159,9 @@ void keyboard(unsigned char a, int x, int y)
 {
    const float speed = 1.f;
 
-	Vec3 v;
+   Vec3 v;
 
-	switch(a)
+   switch(a)
    {
       case 'w':
       case 'W':
