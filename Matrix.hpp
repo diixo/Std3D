@@ -193,8 +193,8 @@ public:
    Matrix4x4 operator*(const Matrix4x4& mtx) const;
 
    // the operations of obtaining a reference to data
-   operator			float*();
-   operator const	float*() const;
+   operator       float*();
+   operator const float*() const;
 
    void identity();
 
@@ -268,9 +268,10 @@ Matrix4x4::Matrix4x4(const Matrix3x3& rm)
 inline 
 Vec3 Matrix4x4::operator * (const Vec3& v) const
 {
-   return Vec3(m[0]*v.x + m[4]*v.y + m[ 8]*v.z + m[12],
-               m[1]*v.x + m[5]*v.y + m[ 9]*v.z + m[13],
-               m[2]*v.x + m[6]*v.y + m[10]*v.z + m[14]);
+   return Vec3(
+      m[0]*v.x + m[4]*v.y + m[ 8]*v.z + m[12],
+      m[1]*v.x + m[5]*v.y + m[ 9]*v.z + m[13],
+      m[2]*v.x + m[6]*v.y + m[10]*v.z + m[14]);
 }
 
 
