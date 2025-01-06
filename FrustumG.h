@@ -54,11 +54,9 @@ Matrix4x4 CPosition::makeLookAt() const
    const Vec3 eye(0.f, 0.f, mRadius);
 
    Matrix4x4 rotateRefWorld = Matrix4x4::makeRotateY(mYaw);
-
-   Matrix4x4 viewMtx = Matrix4x4::makeTranslate(-eye) * Matrix4x4::makeRotateX(mPitch);
-
    rotateRefWorld.transpose();
-   return viewMtx * rotateRefWorld;
+
+   return Matrix4x4::makeTranslate(-eye) * Matrix4x4::makeRotateX(mPitch) * rotateRefWorld;
 }
 
 
@@ -162,12 +160,13 @@ public:
 
 //protected:
 
-   Plane mClipPlanes[P_AMOUNT];                 ///< clipping planes
+   Plane mClipPlanes[P_AMOUNT];                    ///< clipping planes
 
    Vec3 mNTL, mNTR, mNBL, mNBR, mFTL, mFTR, mFBL, mFBR;   ///< frustum pyramid points
 
-   float mNearD, mFarD, mRatio, mFovY;            ///< camera configuration
+   float mNearD, mFarD, mRatio, mFovY;             ///< camera configuration
 
+   // create for optimization, to avoid extra-calculation
    float mNW, mNH, mFW, mFH;
 
 };
