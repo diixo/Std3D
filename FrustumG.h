@@ -53,12 +53,7 @@ inline
 Matrix4x4 CPosition::calculateView() const
 {
    const Vec3 eye(0.f, 0.f, mRadius);
-   const Vec3 up(0.f, 1.f, 0.f);
-   const Vec3 lookAt(0.f, 0.f, 0.f);  // always look into origin(0,0,0).
-                                      // Vnew = Mr * (Mt * V)
-                                      // Vnew = (Mr * Mt) * V = Mtransform * V
 
-   Matrix4x4 viewMtx = Matrix4x4::makeTranslate(-eye);
    Matrix4x4 rotateRefCam = Matrix4x4::makeRotateX(mPitch);    // camera coordinate-system rotation.
    Matrix4x4 rotateRefWorld = Matrix4x4::makeRotateY(mYaw);    // world coordinate-system rotation.
                                                                // V = Mtransform' * Vnew
@@ -66,16 +61,14 @@ Matrix4x4 CPosition::calculateView() const
 
                                                                // Calculate pitch around origin(0,0,0) in camera-coordinate system.
    {
-      // Extract full translation-vector of camera-coordinate system.
-      const Vec3 translation = Vec3(viewMtx.m[12], viewMtx[13], viewMtx[14]);
 
       // Make back movement camera-coordinate system to origin(0,0,0).
       // Then make rotation (around camera axis coordinate-system) and then make movement to current position  again.
-      rotateRefCam = Matrix4x4::makeTranslate(translation) * (rotateRefCam * Matrix4x4::makeTranslate(-translation));
+      rotateRefCam = Matrix4x4::makeTranslate(-eye) * (rotateRefCam * Matrix4x4::makeTranslate(eye));
    }
 
    // Apply rotation pitch around camera-origin in camera-coordinate system.
-   viewMtx = rotateRefCam * viewMtx;
+   Matrix4x4 viewMtx = rotateRefCam * Matrix4x4::makeTranslate(-eye);
 
    // Apply rotation in world coordinate-system.
    viewMtx = viewMtx * rotateRefWorld;
