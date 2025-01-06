@@ -48,22 +48,15 @@ struct CPosition
 };
 
 
-
 inline
 Matrix4x4 CPosition::calculateView() const
 {
    const Vec3 eye(0.f, 0.f, mRadius);
 
-   Matrix4x4 rotateRefWorld = Matrix4x4::makeRotateY(mYaw);    // world coordinate-system rotation.
-                                                               // V = Mtransform' * Vnew
-                                                               // Mtansform' = (Mr * Mt)' = Mt' * Mr'
+   Matrix4x4 rotateRefWorld = Matrix4x4::makeRotateY(mYaw);
 
-                                                               // Calculate pitch around origin(0,0,0) in camera-coordinate system.
-
-   // Apply rotation pitch around camera-origin in camera-coordinate system.
    Matrix4x4 viewMtx = Matrix4x4::makeTranslate(-eye) * Matrix4x4::makeRotateX(mPitch);
 
-   // Apply rotation in world coordinate-system.
    rotateRefWorld.transpose();
    viewMtx = viewMtx * rotateRefWorld;
 
@@ -74,7 +67,8 @@ Matrix4x4 CPosition::calculateView() const
 inline
 Matrix4x4 CPosition::calculateLookAt() const
 {
-   return this->calculateView();
+   // the same as current implementation:
+   //return this->calculateView();
 
    // Rotations: cameraPitch, worldYaw
    // Mview = Mpitch * Myaw * T
@@ -87,18 +81,13 @@ Matrix4x4 CPosition::calculateLookAt() const
 
    // return Mt' * Mr'
 
-   Matrix4x4 lookAt =
-      Matrix4x4::makeTranslate(-Vec3(0.f, 0.f, mRadius)) *
-      Matrix4x4::makeRotateX(mPitch) *
-      Matrix4x4::makeRotateY(-mYaw);
 
-   /*
+   /* no-optimized implementation version:
    const Vec3 pos = makeSpherical(mPitch, mYaw, mRadius);
-   Matrix4x4 look = Matrix4x4::makeLookAt(pos, Vec3(), Vec3(0.f, 1.f, 0.f));
+   return Matrix4x4::makeLookAt(pos, Vec3(), Vec3(0.f, 1.f, 0.f));
    */
 
-   Matrix4x4 mtx_lookAt = Matrix4x4::makeLookAt(mRadius, mPitch, mYaw, Vec3());
-   return mtx_lookAt;
+   return Matrix4x4::makeLookAt(mRadius, mPitch, mYaw, Vec3());
 }
 
 
