@@ -254,9 +254,9 @@ Matrix4x4::Matrix4x4(const Matrix3x3& rm)
 inline 
 Vec3 Matrix4x4::operator * (const Vec3& v) const
 {
-   return Vec3( m[0]*v.x + m[4]*v.y + m[ 8]*v.z + m[12],
-      m[1]*v.x + m[5]*v.y + m[ 9]*v.z + m[13],
-      m[2]*v.x + m[6]*v.y + m[10]*v.z + m[14] );
+   return Vec3(m[0]*v.x + m[4]*v.y + m[ 8]*v.z + m[12],
+               m[1]*v.x + m[5]*v.y + m[ 9]*v.z + m[13],
+               m[2]*v.x + m[6]*v.y + m[10]*v.z + m[14]);
 }
 
 
@@ -304,12 +304,12 @@ inline
 Matrix4x4 Matrix4x4::makeRotateX(const float angle)
 {
    const double rad = angle*ANG2RAD;
-   const float Cos = (float)cos(rad);
-   const float Sin = (float)sin(rad);
+   const float cs = (float)cos(rad);
+   const float sn = (float)sin(rad);
    Matrix4x4 mat;
    mat.m[0] = 1.0; mat.m[4] = 0.0; mat.m[8] = 0.0;  mat.m[12] = 0.0;
-   mat.m[1] = 0.0; mat.m[5] = Cos; mat.m[9] = -Sin; mat.m[13] = 0.0;
-   mat.m[2] = 0.0; mat.m[6] = Sin; mat.m[10] = Cos; mat.m[14] = 0.0;
+   mat.m[1] = 0.0; mat.m[5] = cs;  mat.m[9] = -sn;  mat.m[13] = 0.0;
+   mat.m[2] = 0.0; mat.m[6] = sn;  mat.m[10] = cs;  mat.m[14] = 0.0;
    mat.m[3] = 0.0; mat.m[7] = 0.0; mat.m[11] = 0.0; mat.m[15] = 1.0;
    return mat;
 }
@@ -319,12 +319,12 @@ inline
 Matrix4x4 Matrix4x4::makeRotateY(const float angle)
 {
    const double rad = angle*ANG2RAD;
-   const float Cos = (float)cos(rad);
-   const float Sin = (float)sin(rad);
+   const float cs = (float)cos(rad);
+   const float sn = (float)sin(rad);
    Matrix4x4 mat;
-   mat.m[0] = Cos;  mat.m[4] = 0.0; mat.m[8] = Sin;  mat.m[12] = 0.0;
+   mat.m[0] = cs;   mat.m[4] = 0.0; mat.m[8] = sn;   mat.m[12] = 0.0;
    mat.m[1] = 0.0;  mat.m[5] = 1.0; mat.m[9] = 0.0;  mat.m[13] = 0.0;
-   mat.m[2] = -Sin; mat.m[6] = 0.0; mat.m[10] = Cos; mat.m[14] = 0.0;
+   mat.m[2] = -sn;  mat.m[6] = 0.0; mat.m[10] = cs;  mat.m[14] = 0.0;
    mat.m[3] = 0.0;  mat.m[7] = 0.0; mat.m[11] = 0.0; mat.m[15] = 1.0;
    return mat;
 }
@@ -334,11 +334,11 @@ inline
 Matrix4x4 Matrix4x4::makeRotateZ(const float angle)
 {
    const double rad = angle*ANG2RAD;
-   const float Cos = (float)cos(rad);
-   const float Sin = (float)sin(rad);
+   const float cs = (float)cos(rad);
+   const float sn = (float)sin(rad);
    Matrix4x4 mat;
-   mat.m[0] = Cos; mat.m[4] = -Sin; mat.m[8] = 0.0;  mat.m[12] = 0.0;
-   mat.m[1] = Sin; mat.m[5] = Cos;  mat.m[9] = 0.0;  mat.m[13] = 0.0;
+   mat.m[0] = cs;  mat.m[4] = -sn;  mat.m[8] = 0.0;  mat.m[12] = 0.0;
+   mat.m[1] = sn;  mat.m[5] = cs;   mat.m[9] = 0.0;  mat.m[13] = 0.0;
    mat.m[2] = 0.0; mat.m[6] = 0.0;  mat.m[10] = 1.0; mat.m[14] = 0.0;
    mat.m[3] = 0.0; mat.m[7] = 0.0;  mat.m[11] = 0.0; mat.m[15] = 1.0;
    return mat;
