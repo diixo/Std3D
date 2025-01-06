@@ -122,7 +122,6 @@ void renderScene(void)
 
    glMatrixMode(GL_MODELVIEW);
 
-
    if (mode)
    {
       Matrix4x4 viewMtx = position.calculateLookAt();
@@ -263,8 +262,7 @@ void viewer(int argc, char **argv)
    glutReshapeFunc(changeSize);
    glutKeyboardFunc(keyboard);
 
-
-   glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+   //glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 
    glBlendFunc(GL_SRC_ALPHA,GL_ONE);			
    glClearColor(0.f, 0.f, 0.f, 0.f);		
