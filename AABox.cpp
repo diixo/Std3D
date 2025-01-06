@@ -89,7 +89,6 @@ UInt8 AABox::is_in(const AABox& box, int dim0, int dim1) const
       b1 = 1;
    }
 
-
    if( box.mPosition.coord[dim0] >= mPosition.coord[dim0] && box.mPosition.coord[dim0] <= pMax.coord[dim0] &&
        boxMax.coord[dim1] >= mPosition.coord[dim1] && boxMax.coord[dim1] <= pMax.coord[dim1]
    )
@@ -97,15 +96,12 @@ UInt8 AABox::is_in(const AABox& box, int dim0, int dim1) const
       b2 = 1;
    }
 
-
    if( boxMax.coord[dim0] >= mPosition.coord[dim0] && boxMax.coord[dim0] <= pMax.coord[dim0] &&
        box.mPosition.coord[dim1] >= mPosition.coord[dim1] && box.mPosition.coord[dim1] <= pMax.coord[dim1]
    )
    {
       b3 = 1;
    }
-
-
    return (b0 + b1 + b2 + b3);
 }
 
@@ -124,7 +120,6 @@ Vec3 AABox::getVertexP(const Vec3 &normal) const
 
    return(res);
 }
-
 
 
 Vec3 AABox::getVertexN(const Vec3 &normal) const

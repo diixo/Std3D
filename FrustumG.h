@@ -103,9 +103,7 @@ Matrix4x4 CMovement::calculateLookAt() const
    viewMtx = Matrix4x4::makeTranslate(Vec3(side, 0.f, forward)) * viewMtx;
 
    // Apply rotation pitch around camera-origin in camera-coordinate system.
-   viewMtx = rotateRefCam * viewMtx;
-
-   return viewMtx;
+   return rotateRefCam * viewMtx;
 }
 
 
@@ -147,11 +145,14 @@ public:
 
 //protected:
 
-   Plane mClipPlanes[P_AMOUNT];                    ///< clipping planes
+   // clipping planes
+   Plane mClipPlanes[P_AMOUNT];
 
-   Vec3 mNTL, mNTR, mNBL, mNBR, mFTL, mFTR, mFBL, mFBR;   ///< frustum pyramid points
+   // frustum pyramid points
+   Vec3 mNTL, mNTR, mNBL, mNBR, mFTL, mFTR, mFBL, mFBR;
 
-   float mNearD, mFarD, mRatio, mFovY;             ///< camera configuration
+   // camera configuration
+   float mNearD, mFarD, mRatio, mFovY;
 
    // create for optimization, to avoid extra-calculation
    float mNW, mNH, mFW, mFH;
