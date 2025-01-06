@@ -160,6 +160,43 @@ Matrix4x4 Matrix4x4::makeLookAt(const Vec3& eye, const Vec3& lookAt, const Vec3&
 }
 
 
+Matrix4x4 Matrix4x4::makeLookAt(const float radius, const float pitch, const float yaw)
+{
+   const double p = pitch * ANG2RAD;
+   const double y = yaw * ANG2RAD;
+
+   const float sn_p = (float)sin(p);
+   const float cs_p = (float)cos(p);
+
+   const float sn_y = (float)sin(y);
+   const float cs_y = (float)cos(y);
+
+   Matrix4x4 mat;
+
+   mat[0] = cs_y;
+   mat[1] = sn_p * sn_y;
+   mat[2] = cs_p * sn_y;
+   mat[3] = 0.f;
+
+   mat[4] = 0.f;
+   mat[5] = cs_p;
+   mat[6] = -sn_p;
+   mat[7] = 0.f;
+
+   mat[8] = -sn_y;
+   mat[9] = sn_p * cs_y;
+   mat[10] = cs_p * cs_y;
+   mat[11] = 0.f;
+
+   mat[12] = 0.f;
+   mat[13] = 0.f;
+   mat[14] = -radius;
+   mat[15] = 1.f;
+
+   return mat;
+}
+
+
 Matrix4x4 Matrix4x4::makeLookAt(const float radius, const float pitch, const float yaw, const Vec3& center)
 {
    const Vec3 right = Matrix4x4::makeRotateY(yaw) * Vec3(1.f, 0.f, 0.f);

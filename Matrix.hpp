@@ -216,6 +216,8 @@ public:
    static Matrix4x4 makeWorldToLocal(const Vec3& xAxis, const Vec3& yAxis, const Vec3& zAxis, const Vec3& origin);
 
    static Matrix4x4 makeLookAt(const Vec3& eye, const Vec3& lookAt, const Vec3& up);
+
+   static Matrix4x4 makeLookAt(const float radius, const float pitch, const float yaw);
    static Matrix4x4 makeLookAt(const float radius, const float pitch, const float yaw, const Vec3& center);
 
 };
