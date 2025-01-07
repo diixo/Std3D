@@ -216,6 +216,11 @@ void keyboard(unsigned char a, int x, int y)
          //view.movement += 2.f*speed;
          break;
 
+      case 'u':   // up-view
+      case 'U':
+         position = CPosition(90.f, 0.f, Radius);
+         break;
+
       case 'r':
       case 'R':
          p.set(0, 0, -5);

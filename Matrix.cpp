@@ -7,7 +7,7 @@
 
 /** Mathematical representation:
 *   [ m00 m01 m02 ] [x]  [ m00*x + m01*y + m02*z ]
-*   [ m10 m11 m12 ]*[y] =[ m10*x + m11*y + m12*z ] 
+*   [ m10 m11 m12 ]*[y] =[ m10*x + m11*y + m12*z ]
 *   [ m20 m21 m22 ] [z]  [ m20*x + m21*y + m22*z ]
 */
 
@@ -85,7 +85,7 @@ void mul4x4(const float* const a, const float* const b, float* const c)
    c[12] = a[0]*b[12] + a[4]*b[13] + a[8] *b[14] + a[12]*b[15];
    c[13] = a[1]*b[12] + a[5]*b[13] + a[9] *b[14] + a[13]*b[15];
    c[14] = a[2]*b[12] + a[6]*b[13] + a[10]*b[14] + a[14]*b[15];
-   c[15] = a[3]*b[12] + a[7]*b[13] + a[11]*b[14] + a[15]*b[15];    
+   c[15] = a[3]*b[12] + a[7]*b[13] + a[11]*b[14] + a[15]*b[15];
 }
 
 Matrix4x4::Matrix4x4()
