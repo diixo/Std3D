@@ -220,29 +220,13 @@ Matrix4x4 Matrix4x4::makeLookAt(const float radius, const float pitch, const flo
    const double sn_y = sin(y);
    const double cs_y = cos(y);
 
-   Matrix4x4 mtx;
+   const Vec3 right((float)cs_y, 0.f, (float)-sn_y);
 
-   mtx[0] = (float)cs_y;
-   mtx[1] = (float)(-sn_p * sn_y);
-   mtx[2] = (float)(cs_p * sn_y);
-   mtx[3] = 0.f;
+   const Vec3 up((float)(-sn_p*sn_y), (float)cs_p, (float)(-sn_p*cs_y));
 
-   mtx[4] = 0.f;
-   mtx[5] = (float)cs_p;
-   mtx[6] = (float)sn_p;
-   mtx[7] = 0.f;
+   const Vec3 dir((float)(cs_p*sn_y), (float)sn_p, (float)(cs_p*cs_y));
 
-   mtx[8] = (float)-sn_y;
-   mtx[9] = (float)(-sn_p * cs_y);
-   mtx[10] = (float)(cs_p * cs_y);
-   mtx[11] = 0.f;
-
-   mtx[12] = -Vec3::dot(Vec3(mtx[0], mtx[4], mtx[8]), eye);
-   mtx[13] = -Vec3::dot(Vec3(mtx[1], mtx[5], mtx[9]), eye);
-   mtx[14] = -Vec3::dot(Vec3(mtx[2], mtx[6], mtx[10]), eye);
-   mtx[15] = 1.f;
-
-   return mtx;
+   return Matrix4x4::makeWorldToLocal(right, up, dir, eye);
 }
 
 
