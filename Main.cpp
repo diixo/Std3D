@@ -176,12 +176,14 @@ void keyboard(unsigned char a, int x, int y)
 
       case 'q':
       case 'Q':
-         movement.yaw -= speed;
+         if (mode) position.mLookAt.x -= speed;
+         else movement.yaw -= speed;
          break;
 
       case 'e':
       case 'E':
-         movement.yaw += speed;
+         if (mode) position.mLookAt.x += speed;
+         else movement.yaw += speed;
          break;
 
       case 'a':
@@ -196,12 +198,14 @@ void keyboard(unsigned char a, int x, int y)
 
       case 't':
       case 'T':
-         movement.side += speed;
+         if (mode) position.mLookAt.z += speed;
+         else movement.side += speed;
          break;
 
       case 'g':
       case 'G':
-         movement.side -= speed;
+         if (mode) position.mLookAt.z -= speed;
+         else movement.side -= speed;
          break;
 
       case '+':

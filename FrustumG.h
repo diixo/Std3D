@@ -22,6 +22,7 @@ struct CPosition
       : mPitch(pitch)
       , mYaw(yaw)
       , mRadius(radius)
+      , mLookAt()
    {
    }
 
@@ -42,6 +43,7 @@ struct CPosition
    float mPitch;
    float mYaw;
    float mRadius;
+   Vec3 mLookAt;
 
    Matrix4x4 calculateLookAt() const;
 };
@@ -51,7 +53,7 @@ inline
 Matrix4x4 CPosition::calculateLookAt() const
 {
    // the same as current implementation:
-   return Matrix4x4::makeLookAt(mRadius, mPitch, mYaw);
+   return Matrix4x4::makeLookAt(mRadius, mPitch, mYaw, mLookAt);
 
    // the same current implementation:
    //return Matrix4x4::makeLookAt(mRadius, mPitch, mYaw, Vec3());
