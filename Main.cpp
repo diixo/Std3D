@@ -28,7 +28,6 @@ int spheresTotal = 0;
 
 
 CPosition position(10.f, 60.f, Radius);
-CMovement movement(Vec3(0.f, 10.f, Radius), Vec3(), Vec3(0.f, 1.f, 0.f));
 
 bool mode = true;
 Vec3 p(0,0,-5), l(0,0,0), u(0,1,0); // pos,lookAt,up
@@ -129,7 +128,7 @@ void renderScene(void)
    }
    else
    {
-      Matrix4x4 viewMtx = movement.calculateLookAt();
+      Matrix4x4 viewMtx = position.calculateLookAt();
       glLoadMatrixf(viewMtx.m);
    }
 
@@ -165,25 +164,21 @@ void keyboard(unsigned char a, int x, int y)
       case 'w':
       case 'W':
          position.mPitch = normalize360(position.mPitch + speed);
-         movement.pitch += speed;
          break;
 
       case 's':
       case 'S':
          position.mPitch = normalize360(position.mPitch - speed);
-         movement.pitch -= speed;
          break;
 
       case 'q':
       case 'Q':
          if (mode) position.mLookAt.x -= speed;
-         else movement.yaw -= speed;
          break;
 
       case 'e':
       case 'E':
          if (mode) position.mLookAt.x += speed;
-         else movement.yaw += speed;
          break;
 
       case 'a':
@@ -199,25 +194,19 @@ void keyboard(unsigned char a, int x, int y)
       case 't':
       case 'T':
          if (mode) position.mLookAt.z += speed;
-         else movement.side += speed;
          break;
 
       case 'g':
       case 'G':
          if (mode) position.mLookAt.z -= speed;
-         else movement.side -= speed;
          break;
 
       case '+':
          position += speed;
-         movement.forward += speed;
-         //view.movement -= 2.f*speed;
          break;
 
       case '-':
          position -= speed;
-         movement.forward -= speed;
-         //view.movement += 2.f*speed;
          break;
 
       case 'u':   // up-view
@@ -237,7 +226,6 @@ void keyboard(unsigned char a, int x, int y)
          {
             mode = !mode;
             position = CPosition(10.f, 60.f, Radius);
-            movement = CMovement(Vec3(0.f, 10.f, Radius), Vec3(), Vec3(0.f, 1.f, 0.f));
          }
          break;
 

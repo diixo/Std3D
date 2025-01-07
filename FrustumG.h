@@ -67,48 +67,6 @@ Matrix4x4 CPosition::calculateLookAt() const
 }
 
 
-struct CMovement
-{
-public:
-
-   CMovement(const Vec3& vEye, const Vec3& vLookAt, const Vec3& vUp)
-      : eye(vEye)
-      , lookAt(vLookAt)
-      , up(vUp)
-      , pitch(0.f)
-      , yaw(0.f)
-      , forward(0.f)
-      , side(0.f)
-   {
-   }
-
-   Vec3 eye;
-   Vec3 lookAt;
-   Vec3 up;
-
-   float pitch;
-   float yaw;
-
-   float forward; // movement ahead
-   float side;    // movement aside
-
-   Matrix4x4 calculateLookAt() const;
-};
-
-inline
-Matrix4x4 CMovement::calculateLookAt() const
-{
-   Matrix4x4 viewMtx      = Matrix4x4::makeLookAt(eye, lookAt, up);                      // final view matrix.
-   Matrix4x4 rotateRefCam = Matrix4x4::makeRotateX(pitch) * Matrix4x4::makeRotateY(yaw); // camera coordinate-system rotation.
-
-   // Make final view Matrix with movement but without any rotations.
-   viewMtx = Matrix4x4::makeTranslate(Vec3(side, 0.f, forward)) * viewMtx;
-
-   // Apply rotation pitch around camera-origin in camera-coordinate system.
-   return rotateRefCam * viewMtx;
-}
-
-
 class FrustumG
 {
 public:
