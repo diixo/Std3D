@@ -171,7 +171,6 @@ Matrix4x4 Matrix4x4::makeLookAt(const float radius, const float pitch, const flo
 
    M = M1 * M2 * M3 = M1 * (M2 * M3)
    */
-
    const double p = pitch * ANG2RAD;
    const double y = yaw * ANG2RAD;
 
@@ -181,29 +180,29 @@ Matrix4x4 Matrix4x4::makeLookAt(const float radius, const float pitch, const flo
    const double sn_y = sin(y);
    const double cs_y = cos(y);
 
-   Matrix4x4 mat;
+   Matrix4x4 mtx;
 
-   mat[0] = (float)cs_y;
-   mat[1] = (float)(-sn_p * sn_y);
-   mat[2] = (float)(cs_p * sn_y);
-   mat[3] = 0.f;
+   mtx.m[0] = (float)cs_y;
+   mtx.m[1] = (float)(-sn_p * sn_y);
+   mtx.m[2] = (float)(cs_p * sn_y);
+   mtx.m[3] = 0.f;
 
-   mat[4] = 0.f;
-   mat[5] = (float)cs_p;
-   mat[6] = (float)sn_p;
-   mat[7] = 0.f;
+   mtx.m[4] = 0.f;
+   mtx.m[5] = (float)cs_p;
+   mtx.m[6] = (float)sn_p;
+   mtx.m[7] = 0.f;
 
-   mat[8] = (float)-sn_y;
-   mat[9] = (float)(-sn_p * cs_y);
-   mat[10] = (float)(cs_p * cs_y);
-   mat[11] = 0.f;
+   mtx.m[8] = (float)-sn_y;
+   mtx.m[9] = (float)(-sn_p * cs_y);
+   mtx.m[10] = (float)(cs_p * cs_y);
+   mtx.m[11] = 0.f;
 
-   mat[12] = 0.f;
-   mat[13] = 0.f;
-   mat[14] = -radius;
-   mat[15] = 1.f;
+   mtx.m[12] = 0.f;
+   mtx.m[13] = 0.f;
+   mtx.m[14] = -radius;
+   mtx.m[15] = 1.f;
 
-   return mat;
+   return mtx;
 }
 
 
