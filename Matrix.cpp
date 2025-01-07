@@ -182,7 +182,7 @@ Matrix4x4 Matrix4x4::makeLookAt(const float radius, const float pitch, const flo
 
    const Vec3 right((float)cs_y, 0.f, (float)-sn_y);
 
-   const Vec3 up((float)(-sn_p * sn_y), (float)cs_p, (float)(-sn_p * cs_y));
+   const Vec3 up((float)(-sn_p*sn_y), (float)cs_p, (float)(-sn_p*cs_y));
 
    const Vec3 dir((float)(cs_p*sn_y), (float)sn_p, (float)(cs_p*cs_y));
 
@@ -212,9 +212,8 @@ Matrix4x4 Matrix4x4::makeLookAt(const float radius, const float pitch, const flo
 
 Matrix4x4 Matrix4x4::makeLookAt(const float radius, const float pitch, const float yaw, const Vec3& center)
 {
-   return Matrix4x4::makeLookAt(radius, pitch, yaw) * Matrix4x4::makeTranslate(-center);
-   /*
-   const Vec3 eye = makeSpherical(pitch, yaw, radius);
+   // Current implementation is the same equal:
+   // return Matrix4x4::makeLookAt(radius, pitch, yaw) * Matrix4x4::makeTranslate(-center);
 
    const double p = pitch * ANG2RAD;
    const double y = yaw * ANG2RAD;
@@ -231,8 +230,24 @@ Matrix4x4 Matrix4x4::makeLookAt(const float radius, const float pitch, const flo
 
    const Vec3 dir((float)(cs_p*sn_y), (float)sn_p, (float)(cs_p*cs_y));
 
-   return Matrix4x4::makeWorldToLocal(right, up, dir, eye) * Matrix4x4::makeTranslate(-center);
-   */
+   Matrix4x4 mtx;
+
+   mtx.m[0] = right.x;
+   mtx.m[4] = right.y;
+   mtx.m[8] = right.z;
+   mtx.m[12] = -Vec3::dot(right, center);
+
+   mtx.m[1] = up.x;
+   mtx.m[5] = up.y;
+   mtx.m[9] = up.z;
+   mtx.m[13] = -Vec3::dot(up, center);
+
+   mtx.m[2] = dir.x;
+   mtx.m[6] = dir.y;
+   mtx.m[10] = dir.z;
+   mtx.m[14] = -Vec3::dot(dir, center) - radius;
+
+   return mtx;
 }
 
 
