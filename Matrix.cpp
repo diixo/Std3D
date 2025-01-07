@@ -140,7 +140,7 @@ Matrix4x4 Matrix4x4::makeWorldToLocal(const Vec3& xAxis, const Vec3& yAxis, cons
    view.m[6] = zAxis.y;
    view.m[10] = zAxis.z;
    view.m[14] = -Vec3::dot(zAxis, origin);
-
+   //[3]=[7]=[11]=[15]=1
    return view;
 }
 
@@ -212,31 +212,13 @@ Matrix4x4 Matrix4x4::makeLookAt(const float radius, const float pitch, const flo
    const Vec3 right = Matrix4x4::makeRotateY(yaw) * Vec3(1.f, 0.f, 0.f);
 
    Vec3 dir = makeSpherical(pitch, yaw, radius);
+   Vec3 eye = dir + center;
    dir.normalize();
 
    Vec3 up = Vec3::cross(dir, right);
    up.normalize();
 
-   Matrix4x4 view;
-
-   // world rotation axis
-   view.m[0] = right.x;
-   view.m[4] = right.y;
-   view.m[8] = right.z;
-
-   view.m[1] = up.x;
-   view.m[5] = up.y;
-   view.m[9] = up.z;
-
-   view.m[2] = dir.x;
-   view.m[6] = dir.y;
-   view.m[10] = dir.z;
-
-   view.m[12] = -center.x;
-   view.m[13] = -center.y;
-   view.m[14] = -center.z - radius;
-
-   return view;
+   return makeWorldToLocal(right, up, dir, eye);
 }
 
 
