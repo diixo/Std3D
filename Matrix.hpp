@@ -43,6 +43,8 @@ public:
    static Matrix3x3 makeScale(const Vec3& sv);
 };
 
+void mul3x3(const float* const a, const float* const b, float* const c);
+
 inline 
 Matrix3x3 Matrix3x3::makeScale(const Vec3& sv)
 {
@@ -52,8 +54,6 @@ Matrix3x3 Matrix3x3::makeScale(const Vec3& sv)
    mat.m[8] = sv.z;
    return mat;
 }
-
-void mul3x3(const float* const a, const float* const b, float* const c);
 
 inline 
 float& Matrix3x3::operator[] (const Int32 idx)
