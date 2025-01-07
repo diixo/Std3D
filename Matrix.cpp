@@ -140,7 +140,7 @@ Matrix4x4 Matrix4x4::makeWorldToLocal(const Vec3& xAxis, const Vec3& yAxis, cons
    view.m[6] = zAxis.y;
    view.m[10] = zAxis.z;
    view.m[14] = -Vec3::dot(zAxis, origin);
-   //[3]=[7]=[11]=[15]=1
+
    return view;
 }
 
@@ -209,16 +209,40 @@ Matrix4x4 Matrix4x4::makeLookAt(const float radius, const float pitch, const flo
 
 Matrix4x4 Matrix4x4::makeLookAt(const float radius, const float pitch, const float yaw, const Vec3& center)
 {
-   const Vec3 right = Matrix4x4::makeRotateY(yaw) * Vec3(1.f, 0.f, 0.f);
+   const Vec3 eye = makeSpherical(pitch, yaw, radius) + center;
 
-   Vec3 dir = makeSpherical(pitch, yaw, radius);
-   Vec3 eye = dir + center;
-   dir.normalize();
+   const double p = pitch * ANG2RAD;
+   const double y = yaw * ANG2RAD;
 
-   Vec3 up = Vec3::cross(dir, right);
-   up.normalize();
+   const double sn_p = sin(p);
+   const double cs_p = cos(p);
 
-   return makeWorldToLocal(right, up, dir, eye);
+   const double sn_y = sin(y);
+   const double cs_y = cos(y);
+
+   Matrix4x4 mtx;
+
+   mtx[0] = (float)cs_y;
+   mtx[1] = (float)(-sn_p * sn_y);
+   mtx[2] = (float)(cs_p * sn_y);
+   mtx[3] = 0.f;
+
+   mtx[4] = 0.f;
+   mtx[5] = (float)cs_p;
+   mtx[6] = (float)sn_p;
+   mtx[7] = 0.f;
+
+   mtx[8] = (float)-sn_y;
+   mtx[9] = (float)(-sn_p * cs_y);
+   mtx[10] = (float)(cs_p * cs_y);
+   mtx[11] = 0.f;
+
+   mtx[12] = -Vec3::dot(Vec3(mtx[0], mtx[4], mtx[8]), eye);
+   mtx[13] = -Vec3::dot(Vec3(mtx[1], mtx[5], mtx[9]), eye);
+   mtx[14] = -Vec3::dot(Vec3(mtx[2], mtx[6], mtx[10]), eye);
+   mtx[15] = 1.f;
+
+   return mtx;
 }
 
 
