@@ -5,8 +5,8 @@
 
 --------------------------------------------------------*/
 
-
 #include "AABox.h"
+
 
 AABox::AABox()
 {}
@@ -74,31 +74,27 @@ UInt8 AABox::is_in(const AABox& box, int dim0, int dim1) const
    UInt8 b3 = 0;
 
    //// check Position
-   if( box.mPosition.coord[dim0] >= mPosition.coord[dim0] && box.mPosition.coord[dim0] <= pMax.coord[dim0] &&
-       box.mPosition.coord[dim1] >= mPosition.coord[dim1] && box.mPosition.coord[dim1] <= pMax.coord[dim1]
-      )
+   if ( box.mPosition.coord[dim0] >= mPosition.coord[dim0] && box.mPosition.coord[dim0] <= pMax.coord[dim0] &&
+        box.mPosition.coord[dim1] >= mPosition.coord[dim1] && box.mPosition.coord[dim1] <= pMax.coord[dim1] )
    {
       b0 = 1;
    }
 
    //// check Max
-   if( boxMax.coord[dim0] >= mPosition.coord[dim0] && boxMax.coord[dim0] <= pMax.coord[dim0] &&
-       boxMax.coord[dim1] >= mPosition.coord[dim1] && boxMax.coord[dim1] <= pMax.coord[dim1]
-   )
+   if ( boxMax.coord[dim0] >= mPosition.coord[dim0] && boxMax.coord[dim0] <= pMax.coord[dim0] &&
+        boxMax.coord[dim1] >= mPosition.coord[dim1] && boxMax.coord[dim1] <= pMax.coord[dim1] )
    {
       b1 = 1;
    }
 
-   if( box.mPosition.coord[dim0] >= mPosition.coord[dim0] && box.mPosition.coord[dim0] <= pMax.coord[dim0] &&
-       boxMax.coord[dim1] >= mPosition.coord[dim1] && boxMax.coord[dim1] <= pMax.coord[dim1]
-   )
+   if ( box.mPosition.coord[dim0] >= mPosition.coord[dim0] && box.mPosition.coord[dim0] <= pMax.coord[dim0] &&
+        boxMax.coord[dim1] >= mPosition.coord[dim1] && boxMax.coord[dim1] <= pMax.coord[dim1] )
    {
       b2 = 1;
    }
 
-   if( boxMax.coord[dim0] >= mPosition.coord[dim0] && boxMax.coord[dim0] <= pMax.coord[dim0] &&
-       box.mPosition.coord[dim1] >= mPosition.coord[dim1] && box.mPosition.coord[dim1] <= pMax.coord[dim1]
-   )
+   if ( boxMax.coord[dim0] >= mPosition.coord[dim0] && boxMax.coord[dim0] <= pMax.coord[dim0] &&
+        box.mPosition.coord[dim1] >= mPosition.coord[dim1] && box.mPosition.coord[dim1] <= pMax.coord[dim1] )
    {
       b3 = 1;
    }
