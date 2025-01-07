@@ -218,7 +218,6 @@ Matrix4x4 Matrix4x4::makeLookAt(const float radius, const float pitch, const flo
    up.normalize();
 
    Matrix4x4 view;
-   view.identity();
 
    // world rotation axis
    view.m[0] = right.x;
