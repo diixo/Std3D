@@ -163,42 +163,42 @@ void keyboard(unsigned char a, int x, int y)
    {
       case 'w':
       case 'W':
-         position.mPitch = normalize360(position.mPitch + speed);
+         position.mLookAt -= position.dir() * speed;
          break;
 
       case 's':
       case 'S':
-         position.mPitch = normalize360(position.mPitch - speed);
-         break;
-
-      case 'q':
-      case 'Q':
-         if (mode) position.mLookAt.x -= speed;
-         break;
-
-      case 'e':
-      case 'E':
-         if (mode) position.mLookAt.x += speed;
-         break;
-
-      case 'a':
-      case 'A':
-         position.mYaw = normalize360(position.mYaw - speed);
+         position.mLookAt += position.dir() * speed;
          break;
 
       case 'd':
       case 'D':
+         position.mLookAt += position.right() * 0.5f;
+         break;
+
+      case 'a':
+      case 'A':
+         position.mLookAt -= position.right() * 0.5f;
+         break;
+
+      case 'q':
+      case 'Q':
+         position.mYaw = normalize360(position.mYaw - speed);
+         break;
+
+      case 'e':
+      case 'E':
          position.mYaw = normalize360(position.mYaw + speed);
          break;
 
       case 't':
       case 'T':
-         if (mode) position.mLookAt.z += speed;
+         position.mPitch = normalize360(position.mPitch + speed);
          break;
 
       case 'g':
       case 'G':
-         if (mode) position.mLookAt.z -= speed;
+         position.mPitch = normalize360(position.mPitch - speed);
          break;
 
       case '+':
