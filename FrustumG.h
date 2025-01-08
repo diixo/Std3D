@@ -49,12 +49,10 @@ struct CPosition
 
    void update();
 
-   inline
    const Matrix4x4 getView() const
    {
       return mView;
    }
-
    Vec3 right() const
    {
       return Vec3(mView[0], mView[4], mView[8]);
