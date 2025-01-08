@@ -22,8 +22,7 @@ public:
    Matrix3x3(
       const float r1c1, const float r2c1, const float r3c1,
       const float r1c2, const float r2c2, const float r3c2,
-      const float r1c3, const float r2c3, const float r3c3
-      );
+      const float r1c3, const float r2c3, const float r3c3);
 
    void identity();
 
@@ -117,8 +116,7 @@ inline
 Matrix3x3::Matrix3x3(
    const float r1c1, const float r2c1, const float r3c1,
    const float r1c2, const float r2c2, const float r3c2,
-   const float r1c3, const float r2c3, const float r3c3
-   )
+   const float r1c3, const float r2c3, const float r3c3)
 {
    m[0] = r1c1; m[3] = r1c2; m[6] = r1c3;
    m[1] = r2c1; m[4] = r2c2; m[7] = r2c3;
@@ -190,6 +188,8 @@ public:
    float m[16];
 
    Matrix4x4();
+   explicit Matrix4x4(const Matrix3x3& rm);
+
    Matrix4x4 operator*(const Matrix4x4& mtx) const;
 
    // the operations of obtaining a reference to data
@@ -200,8 +200,6 @@ public:
 
    void transpose();
    void invert();
-
-   explicit Matrix4x4(const Matrix3x3& rm);
 
    /// v' = M x v
    Vec3 operator * (const Vec3& v) const;
