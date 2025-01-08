@@ -14,7 +14,7 @@ class CView
 {
 public:
 
-	CView(const float pitch, const float yaw, const float radius);
+   CView(const float pitch, const float yaw, const float radius);
 
 
    Matrix4x4 calculateViewCameraRelated(const Vec3& eye, const Vec3& lookAt, const Vec3& up) const;
