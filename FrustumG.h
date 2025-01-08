@@ -28,20 +28,6 @@ struct CPosition
       this->update();
    }
 
-   inline
-   CPosition& operator += (float value)
-   {
-      mRadius = maximum(0.f, mRadius - value);
-      return *this;
-   }
-
-   inline
-   CPosition& operator -= (float value)
-   {
-      mRadius = maximum(0.f, mRadius + value);
-      return *this;
-   }
-
    float mPitch;
    float mYaw;
    float mRadius;
@@ -49,6 +35,18 @@ struct CPosition
    Matrix4x4 mView;
 
    void update();
+
+   CPosition& operator += (float value)
+   {
+      mRadius = maximum(0.f, mRadius - value);
+      return *this;
+   }
+
+   CPosition& operator -= (float value)
+   {
+      mRadius = maximum(0.f, mRadius + value);
+      return *this;
+   }
 
    const Matrix4x4& getView() const
    {
