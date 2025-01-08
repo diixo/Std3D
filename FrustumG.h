@@ -44,16 +44,23 @@ struct CPosition
    float mYaw;
    float mRadius;
    Vec3 mLookAt;
+   Matrix4x4 mView;
 
-   Matrix4x4 calculateLookAt() const;
+   void update();
+
+   inline
+   const Matrix4x4 getView() const
+   {
+      return mView;
+   }
 };
 
 
 inline
-Matrix4x4 CPosition::calculateLookAt() const
+void CPosition::update()
 {
    // the same as current implementation:
-   return Matrix4x4::makeLookAt(mRadius, mPitch, mYaw, mLookAt);
+   mView = Matrix4x4::makeLookAt(mRadius, mPitch, mYaw, mLookAt);
 
    // the same current implementation:
    //return Matrix4x4::makeLookAt(mRadius, mPitch, mYaw, Vec3());

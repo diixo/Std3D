@@ -116,7 +116,7 @@ Matrix4x4::operator float*()
 }
 
 
-Matrix4x4::operator const float*() const 
+Matrix4x4::operator const float*() const
 {
    return static_cast<const float*>(&m[0]);
 }

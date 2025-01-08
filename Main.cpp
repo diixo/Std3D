@@ -121,15 +121,15 @@ void renderScene(void)
 
    glMatrixMode(GL_MODELVIEW);
 
+   position.update();
+
    if (mode)
    {
-      Matrix4x4 viewMtx = position.calculateLookAt();
-      glLoadMatrixf(viewMtx.m);
+      glLoadMatrixf(position.getView());
    }
    else
    {
-      Matrix4x4 viewMtx = position.calculateLookAt();
-      glLoadMatrixf(viewMtx.m);
+      glLoadMatrixf(position.getView());
    }
 
    frustum.update(p, l, u);
