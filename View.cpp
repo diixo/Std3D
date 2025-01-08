@@ -15,7 +15,6 @@ CView::CView(const float pitch, const float yaw, const float radius)
    , camPitch(0.f)
    , camYaw(0.f)
    , worldYaw(0.f)
-   , movement(radius)
 {
 }
 
@@ -27,7 +26,7 @@ Matrix4x4 CView::calculateViewCameraRelated(const Vec3& eye, const Vec3& lookAt,
    Matrix4x4 rotateRefWorld = Matrix4x4::makeRotateY(worldYaw);   // world coordinate-system rotation.
 
    // Make final view Matrix with movement but without any rotations.
-   //viewMtx = Matrix4x4::makeTranslate(Vec3(0.f, 0.f, movement)) * viewMtx;
+   // viewMtx = Matrix4x4::makeTranslate(Vec3(0.f, 0.f, movement)) * viewMtx;
 
    // Apply rotation pitch+yaw around camera-origin in camera-coordinate system.
    viewMtx = rotateRefCam * viewMtx;
@@ -70,9 +69,9 @@ Matrix4x4 CView::calculateViewOriginRelated(const Vec3& eye, const Vec3& lookAt,
 
 Matrix4x4 CView::calculateView() const
 {
-   const Matrix4x4 worldRadiusRotation = Matrix4x4::makeRotateX(mPitch) * Matrix4x4::makeRotateY(mYaw);   // no matter the order of rotations.
+   const Matrix4x4 worldRadiusRotation = Matrix4x4::makeRotateX(mPitch) * Matrix4x4::makeRotateY(mYaw);
 
-   const Vec3 eye = worldRadiusRotation * Vec3(0.f, 0.f, -movement);
+   const Vec3 eye = worldRadiusRotation * Vec3(0.f, 0.f, -mRadius);
    const Vec3 up = worldRadiusRotation * Vec3(0.f, 1.f, 0.f);
    const Vec3 lookAt(0.f, 0.f, 0.f);   // always look into origin(0,0,0).
 

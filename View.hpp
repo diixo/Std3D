@@ -36,7 +36,6 @@ public:
    float camPitch;
    float camYaw;
    float worldYaw;
-   float movement;
 
 };
 
