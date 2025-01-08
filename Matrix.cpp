@@ -95,11 +95,11 @@ Matrix4x4::Matrix4x4()
 
 void Matrix4x4::identity()
 {
-   for (register int i=0; i < 15; i++)
+   for (register int i = 0; i < 15; i++)
    {
-      m[i]=0.f;
+      m[i] = 0.f;
    }
-   m[0]=m[5]=m[10]=m[15]=1.f;
+   m[0] = m[5] = m[10] = m[15] = 1.f;
 }
 
 
