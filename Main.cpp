@@ -13,6 +13,7 @@
 #include "FrustumG.h"
 #include "Render.h"
 #include "Matrix.hpp"
+#include "View.hpp"
 
 #include <time.h>
 
