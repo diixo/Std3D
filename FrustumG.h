@@ -5,7 +5,6 @@
 
 --------------------------------------------------------*/
 
-
 #ifndef _FRUSTUM_
 #define _FRUSTUM_
 
@@ -16,9 +15,9 @@
 
 
 // Orbital position
-struct CPosition
+struct CView
 {
-   CPosition::CPosition(const float pitch, const float yaw, const float radius)
+   CView::CView(const float pitch, const float yaw, const float radius)
       : mPitch(pitch)
       , mYaw(yaw)
       , mRadius((float)::fabs(radius))
@@ -36,13 +35,13 @@ struct CPosition
 
    void update();
 
-   CPosition& operator += (float value)
+   CView& operator += (float value)
    {
       mRadius = maximum(0.f, mRadius - value);
       return *this;
    }
 
-   CPosition& operator -= (float value)
+   CView& operator -= (float value)
    {
       mRadius = maximum(0.f, mRadius + value);
       return *this;
@@ -68,7 +67,7 @@ struct CPosition
 
 
 inline
-void CPosition::update()
+void CView::update()
 {
    // the same as current implementation:
    mView = Matrix4x4::makeLookAt(mRadius, mPitch, mYaw, mLookAt);
