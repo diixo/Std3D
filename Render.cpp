@@ -9,7 +9,6 @@
 #include <GL/gl.h>
 
 #include "Render.h"
-//#include "View.hpp"
 
 
 void drawAABox(const AABox& box, float r, float g, float b)
