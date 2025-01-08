@@ -40,9 +40,9 @@ Matrix4x4 CView::calculateViewCameraRelated(const Vec3& eye, const Vec3& lookAt,
 
 Matrix4x4 CView::calculateViewOriginRelated(const Vec3& eye, const Vec3& lookAt, const Vec3& up) const
 {
-	Matrix4x4 viewMtx = Matrix4x4::makeLookAt(eye, lookAt, up);    // final view matrix.
-	Matrix4x4 rotateRefCam = Matrix4x4::makeRotateX(camPitch);     // camera coordinate-system rotation.
-	Matrix4x4 rotateRefWorld = Matrix4x4::makeRotateY(worldYaw);   // world coordinate-system rotation.
+   Matrix4x4 viewMtx = Matrix4x4::makeLookAt(eye, lookAt, up);    // final view matrix.
+   Matrix4x4 rotateRefCam = Matrix4x4::makeRotateX(camPitch);     // camera coordinate-system rotation.
+   Matrix4x4 rotateRefWorld = Matrix4x4::makeRotateY(worldYaw);   // world coordinate-system rotation.
 
    // Make final Matrix with movement but without any rotations.
    // viewMtx = Matrix4x4::makeTranslate(Vec3(0.f, 0.f, movement)) * viewMtx;
