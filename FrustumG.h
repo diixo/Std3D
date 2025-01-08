@@ -23,6 +23,7 @@ struct CPosition
       , mYaw(yaw)
       , mRadius((float)::fabs(radius))
       , mLookAt()
+      , mView()
    {
       this->update();
    }
@@ -49,7 +50,7 @@ struct CPosition
 
    void update();
 
-   const Matrix4x4 getView() const
+   const Matrix4x4& getView() const
    {
       return mView;
    }
