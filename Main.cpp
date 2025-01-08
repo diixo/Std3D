@@ -18,7 +18,7 @@
 
 
 float nearP = 1.0f, farP = 100.0f, Radius = 60.f;
-float angle = 45.f, ratio= 1.f, farF = 15.f;
+float angle = 45.f, farF = 15.f;
 
 int frame = 0, timebase = 0;
 
@@ -29,7 +29,6 @@ int spheresTotal = 0;
 
 CPosition position(10.f, 60.f, Radius);
 
-bool mode = true;
 Vec3 p(0,0,-5), l(0,0,0), u(0,1,0); // pos,lookAt,up
 
 FrustumG frustum;
@@ -42,7 +41,7 @@ void changeSize(int w, int h)
    if(h == 0)
       h = 1;
 
-   ratio = float(w) / float(h);
+   const float ratio = float(w) / float(h);
 
    // Reset the coordinate system before modifying
    glMatrixMode(GL_PROJECTION);
@@ -54,7 +53,7 @@ void changeSize(int w, int h)
    // Set the correct perspective.
    gluPerspective(30.f, ratio, nearP, farP);
 
-   frustum.setCamInternals(angle, w, h, nearP, farF);
+   //frustum.setCamInternals(angle, w, h, nearP, farF);
 }
 
 
@@ -123,14 +122,7 @@ void renderScene(void)
 
    position.update();
 
-   if (mode)
-   {
-      glLoadMatrixf(position.getView());
-   }
-   else
-   {
-      glLoadMatrixf(position.getView());
-   }
+   glLoadMatrixf(position.getView());
 
    frustum.update(p, l, u);
 
@@ -144,8 +136,8 @@ void renderScene(void)
       fps = frame*1000.0/(time-timebase);
       timebase = time;
       frame = 0;
-      sprintf_s(title, "Spheres( Drawn=%d, Total=%d ) FPS=%.1f, Mode=%d, R=%.1f, pitch=%.2f, yaw=%.2f",
-         spheresDrawn, spheresTotal, fps, int(mode), position.mRadius, position.mPitch, position.mYaw);
+      sprintf_s(title, "Spheres( Drawn=%d, Total=%d ) FPS=%.1f, R=%.1f, pitch=%.2f, yaw=%.2f",
+         spheresDrawn, spheresTotal, fps, position.mRadius, position.mPitch, position.mYaw);
       glutSetWindowTitle(title);
    }
 
@@ -156,8 +148,6 @@ void renderScene(void)
 void keyboard(unsigned char a, int x, int y)
 {
    const float speed = 1.f;
-
-   Vec3 v;
 
    switch(a)
    {
@@ -221,14 +211,6 @@ void keyboard(unsigned char a, int x, int y)
          u.set(0, 1, 0);
          break;
 
-      case 'm':
-      case 'M':
-         {
-            mode = !mode;
-            position = CPosition(10.f, 60.f, Radius);
-         }
-         break;
-
       case 'f':
       case 'F':
          frustumOn = !frustumOn;
@@ -251,7 +233,7 @@ void viewer(int argc, char **argv)
    glutInit(&argc, argv);
    glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
    glutInitWindowPosition(100, 50);
-   glutInitWindowSize(640, 640);
+   glutInitWindowSize(800, 600);
    glutCreateWindow("Camera View");
 
    glutDisplayFunc(renderScene);
