@@ -115,9 +115,6 @@ float Vec3::square() const
    return (x*x + y*y + z*z);
 }
 
-// -----------------------------------------------------------------------
-// For debug pruposes: Prints a vector
-// -----------------------------------------------------------------------
 
 void Vec3::print(const char* name) const
 {

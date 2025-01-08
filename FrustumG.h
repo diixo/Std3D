@@ -21,7 +21,7 @@ struct CPosition
    CPosition::CPosition(const float pitch, const float yaw, const float radius)
       : mPitch(pitch)
       , mYaw(yaw)
-      , mRadius(radius)
+      , mRadius((float)::fabs(radius))
       , mLookAt()
    {
       this->update();
