@@ -24,6 +24,7 @@ struct CPosition
       , mRadius(radius)
       , mLookAt()
    {
+      this->update();
    }
 
    inline
