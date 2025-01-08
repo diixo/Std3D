@@ -21,7 +21,7 @@ add_executable(app_frustum_std3d
    Plane.cpp
    Render.cpp 
    Vec3.cpp
-   View.cpp
+   #View.cpp
    )
 
 
