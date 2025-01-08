@@ -41,6 +41,9 @@ public:
    Vec3 operator +(const Vec3 &v) const;
    Vec3 operator -(const Vec3 &v) const;
 
+   Vec3& operator +=(const Vec3 &v);
+   Vec3& operator -=(const Vec3 &v);
+
    // crossProduct
    static Vec3 cross(const Vec3 &v0, const Vec3 &v1);
    Vec3 operator *(float t) const;

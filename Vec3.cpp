@@ -31,14 +31,30 @@ Vec3::Vec3(float fx, float fy, float fz)
 // Methods
 //////////////////////////////////////////////////////////////////////
 
-Vec3 Vec3::operator+(const Vec3 &v) const
+Vec3 Vec3::operator + (const Vec3 &v) const
 {
 	return Vec3(x + v.x, y + v.y, z + v.z);
 }
 
-Vec3 Vec3::operator-(const Vec3 &v) const
+Vec3 Vec3::operator - (const Vec3 &v) const
 {
 	return Vec3(x - v.x, y - v.y, z - v.z);
+}
+
+Vec3& Vec3::operator += (const Vec3& v)
+{
+   x += v.x;
+   y += v.y;
+   z += v.z;
+   return *this;
+}
+
+Vec3& Vec3::operator -= (const Vec3& v)
+{
+   x -= v.x;
+   y -= v.y;
+   z -= v.z;
+   return *this;
 }
 
 Vec3 Vec3::operator-() const
