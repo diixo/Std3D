@@ -70,7 +70,7 @@ void FrustumG::update(const Vec3& eye, const Vec3& look, const Vec3& up)
 
 bool FrustumG::pointInFrustum(const Vec3& p) const
 {
-   for(int i = 0; i < P_AMOUNT; i++)
+   for (int i = 0; i < P_AMOUNT; i++)
    {
       if (mClipPlanes[i].distance(p) < 0.f)
          return false;
@@ -84,7 +84,7 @@ int FrustumG::sphereInFrustum(const Vec3& center, float radius) const
    int result = INSIDE;
    float distance = 0.f;
 
-   for(int i = 0; i < P_AMOUNT; i++)
+   for (int i = 0; i < P_AMOUNT; i++)
    {
       distance = mClipPlanes[i].distance(center);
       if (distance < -radius)
@@ -99,7 +99,7 @@ int FrustumG::sphereInFrustum(const Vec3& center, float radius) const
 int FrustumG::boxInFrustum(const AABox& box) const
 {
    int result = INSIDE;
-   for(int i = 0; i < P_AMOUNT; i++)
+   for (int i = 0; i < P_AMOUNT; i++)
    {
       if (mClipPlanes[i].distance(box.getVertexP(mClipPlanes[i].normal)) < 0.f)
          return OUTSIDE;
