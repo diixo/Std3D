@@ -15,19 +15,18 @@ class Plane
 {
 public:
 
-	Vec3 normal;
-	float d;
+   Plane();
+   Plane(const Vec3 &v1, const Vec3 &v2, const Vec3 &v3);
 
-	Plane();
-	Plane(const Vec3 &v1, const Vec3 &v2, const Vec3 &v3);
+   void set3Points(const Vec3 &v1, const Vec3 &v2, const Vec3 &v3);
+   void setNormalAndPoint(const Vec3 &normal, const Vec3 &point);
+   void setCoefficients(float a, float b, float c, float d);
+   float distance(const Vec3 &p) const;
 
-	void set3Points(const Vec3 &v1, const Vec3 &v2, const Vec3 &v3);
-	void setNormalAndPoint(const Vec3 &normal, const Vec3 &point);
-	void setCoefficients(float a, float b, float c, float d);
-	float distance(const Vec3 &p) const;
+   void print();
 
-	void print();
-
+   Vec3 normal;
+   float d;
 };
 
 
