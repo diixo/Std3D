@@ -1,6 +1,6 @@
 # Std3D
 
-OpenGL small math library
+Small 3D-engine for OpenGL
 
 
 <div align="left" width="540" height="540">
