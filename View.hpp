@@ -13,7 +13,7 @@
 // Orbital position
 struct CView
 {
-   CView(const float pitch, const float yaw, const float radius);
+   CView(const float pitch, const float yaw, const float radius, const Vec3& lookAt);
 
    void update();
 
@@ -44,6 +44,10 @@ struct CView
    Vec3 dir() const
    {
       return Vec3(mView[2], mView[6], mView[10]);
+   }
+   const Vec3& lookAt() const
+   {
+      return mLookAt;
    }
 
 

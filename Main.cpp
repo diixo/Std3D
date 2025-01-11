@@ -28,7 +28,7 @@ int spheresDrawn = 0;
 int spheresTotal = 0;
 
 
-CView position(10.f, 60.f, Radius);
+CView position(10.f, 60.f, Radius, Vec3());
 
 Vec3 p(0,0,-5), l(0,0,0), u(0,1,0); // pos,lookAt,up
 
@@ -202,7 +202,7 @@ void keyboard(unsigned char a, int x, int y)
 
       case 'u':   // up-view
       case 'U':
-         position = CView(90.f, 0.f, Radius);
+         position = CView(90.f, position.mYaw, Radius, position.lookAt());
          break;
 
       case 'r':

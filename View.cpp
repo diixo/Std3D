@@ -8,11 +8,11 @@
 #include "View.hpp"
 
 
-CView::CView(const float pitch, const float yaw, const float radius)
+CView::CView(const float pitch, const float yaw, const float radius, const Vec3& lookAt)
    : mPitch(pitch)
    , mYaw(yaw)
    , mRadius((float)::fabs(radius))
-   , mLookAt()
+   , mLookAt(lookAt)
    , mView()
 {
    this->update();
