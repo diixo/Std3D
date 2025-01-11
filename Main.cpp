@@ -202,7 +202,7 @@ void keyboard(unsigned char a, int x, int y)
 
       case 'u':   // up-view
       case 'U':
-         position = CView(90.f, position.mYaw, Radius, position.lookAt());
+         position = CView(90.f, position.mYaw, position.mRadius, position.lookAt());
          break;
 
       case 'r':
