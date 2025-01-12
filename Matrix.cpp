@@ -166,14 +166,13 @@ Matrix4x4 Matrix4x4::makeLookAt(const Vec3& eye, const Vec3& lookAt, const Vec3&
 
 Matrix4x4 Matrix4x4::makeLookAt(const float radius, const float pitch, const float yaw)
 {
-   /* The same implementation:
+   /* Simple implementation without ref-center:
 
    Matrix4x4 Myaw = Matrix4x4::makeRotateY(mYaw);
    Myaw.transpose();
 
    return Matrix4x4::makeTranslate(Vec3(0.f, 0.f, -mRadius)) * Matrix4x4::makeRotateX(mPitch) * Myaw;
 
-   M = M1 * M2 * M3 = M1 * (M2 * M3)
    */
    const double p = pitch * ANG2RAD;
    const double y = yaw * ANG2RAD;
@@ -216,8 +215,23 @@ Matrix4x4 Matrix4x4::makeLookAt(const float radius, const float pitch, const flo
 
 Matrix4x4 Matrix4x4::makeLookAt(const float radius, const float pitch, const float yaw, const Vec3& center)
 {
-   // Current implementation is the same equal:
-   // return Matrix4x4::makeLookAt(radius, pitch, yaw) * Matrix4x4::makeTranslate(-center);
+   /* Simple implementation without ref-center:
+
+   Matrix4x4 Myaw = Matrix4x4::makeRotateY(mYaw);
+   Myaw.transpose();
+
+   result = Matrix4x4::makeTranslate(Vec3(0.f, 0.f, -mRadius)) * Matrix4x4::makeRotateX(mPitch) * Myaw;
+
+   */
+
+   /* Implementation with ref-center is implementation without ref-center, but with translation(-center):
+
+   result = result * Matrix4x4::makeTranslate(-center);
+
+   Or:
+   result = Matrix4x4::makeLookAt(radius, pitch, yaw) * Matrix4x4::makeTranslate(-center);
+
+   */
 
    const double p = pitch * ANG2RAD;
    const double y = yaw * ANG2RAD;

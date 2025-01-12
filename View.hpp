@@ -33,18 +33,22 @@ struct CView
    {
       return mView;
    }
+
    Vec3 right() const
    {
       return Vec3(mView[0], mView[4], mView[8]);
    }
+
    Vec3 up() const
    {
       return Vec3(mView[1], mView[5], mView[9]);
    }
+
    Vec3 dir() const
    {
       return Vec3(mView[2], mView[6], mView[10]);
    }
+
    const Vec3& lookAt() const
    {
       return mLookAt;
