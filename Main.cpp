@@ -64,32 +64,33 @@ void render()
    spheresDrawn=0;
 
    int cntr = 0;
+   float r = 0.2f;
 
    for (int i = -40; i < 40; i +=4)
    {
-      for(int k = -40; k < 40; k+=4)
+      for (int k = -40; k < 40; k+=4)
       {
          spheresTotal++;
          Vec3 a(i, 0, k);
-         if (!frustumOn || (frustum.sphereInFrustum(a, 0.5) == FrustumG::INSIDE))
+         if (!frustumOn || (frustum.sphereInFrustum(a, r) == FrustumG::INSIDE))
          {
             ++cntr;
 
             glPushMatrix();
             glTranslatef(i,0,k);
             glColor3f(0,1,0);
-            glutSolidSphere(0.2, 5, 5);
+            glutSolidSphere(r, 5, 5);
             glPopMatrix();
             spheresDrawn++;
          }
-         else if(!frustumOn || (frustum.sphereInFrustum(a, 0.5) == FrustumG::INTERSECT))
+         else if (!frustumOn || (frustum.sphereInFrustum(a, r) == FrustumG::INTERSECT))
          {
             ++cntr;
 
             glPushMatrix();
             glTranslatef(i,0,k);
             glColor3f(1,1,0);
-            glutSolidSphere(0.2, 5, 5);
+            glutSolidSphere(r, 5, 5);
             glPopMatrix();
             spheresDrawn++;
          }
@@ -100,7 +101,7 @@ void render()
             glPushMatrix();
             glTranslatef(i,0,k);
             glColor3f(1,0,0);
-            glutSolidSphere(0.2, 5, 5);
+            glutSolidSphere(r, 5, 5);
             glPopMatrix();
             spheresDrawn++;
          }
@@ -220,6 +221,18 @@ void keyboard(unsigned char a, int x, int y)
       case 'p':
       case 'P':
          frustum.print();
+         break;
+
+      case 'x':
+      case 'X':
+         p += position.right() * 0.5f;
+         l += position.right() * 0.5f;
+         break;
+
+      case 'z':
+      case 'Z':
+         p -= position.right() * 0.5f;
+         l -= position.right() * 0.5f;
          break;
       
       case 27: 
