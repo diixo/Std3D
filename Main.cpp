@@ -225,14 +225,26 @@ void keyboard(unsigned char a, int x, int y)
 
       case 'x':
       case 'X':
-         p += position.right() * 0.5f;
-         l += position.right() * 0.5f;
+         p += position.scroll_right() * 0.5f;
+         l += position.scroll_right() * 0.5f;
          break;
 
       case 'z':
       case 'Z':
-         p -= position.right() * 0.5f;
-         l -= position.right() * 0.5f;
+         p -= position.scroll_right() * 0.5f;
+         l -= position.scroll_right() * 0.5f;
+         break;
+
+      case 'y':
+      case 'Y':
+         p -= position.scroll_dir() * 0.5f;
+         l -= position.scroll_dir() * 0.5f;
+         break;
+
+      case 'h':
+      case 'H':
+         p += position.scroll_dir() * 0.5f;
+         l += position.scroll_dir() * 0.5f;
          break;
       
       case 27: 

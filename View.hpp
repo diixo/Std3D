@@ -54,6 +54,19 @@ struct CView
       return mLookAt;
    }
 
+   Vec3 scroll_dir() const
+   {
+      Matrix3x3 Myaw = Matrix3x3::makeRotateY(this->mYaw);
+      Myaw.transpose();
+      return Vec3(Myaw.m[2], Myaw.m[5], Myaw.m[8]);
+   }
+
+   Vec3 scroll_right() const
+   {
+      Matrix3x3 Myaw = Matrix3x3::makeRotateY(this->mYaw);
+      Myaw.transpose();
+      return Vec3(Myaw.m[0], Myaw.m[3], Myaw.m[6]);
+   }
 
    float mPitch;
    float mYaw;
