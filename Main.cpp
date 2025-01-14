@@ -103,7 +103,6 @@ void render()
             glColor3f(1,0,0);
             glutSolidSphere(r, 5, 5);
             glPopMatrix();
-            spheresDrawn++;
          }
       }
    }
@@ -112,9 +111,9 @@ void render()
 }
 
 
-void renderScene(void)
+void renderScene()
 {
-   char title[100];
+   char title[150];
    float fps,time;
 
    glClearColor(0.f, 0.f, 0.f, 0.f);
@@ -138,7 +137,7 @@ void renderScene(void)
       fps = frame*1000.0/(time-timebase);
       timebase = time;
       frame = 0;
-      sprintf_s(title, "Spheres( Drawn=%d, Total=%d ) FPS=%.1f, R=%.1f, pitch=%.2f, yaw=%.2f",
+      sprintf_s(title, "Frustum_Spheres( Drawn=%d, Total=%d ) FPS=%.1f, R=%.1f, pitch=%.1f, yaw=%.1f (w-s, a-d, q-e, z-x, t-g, y-h, u-j)",
          spheresDrawn, spheresTotal, fps, position.mRadius, position.mPitch, position.mYaw);
       glutSetWindowTitle(title);
    }
@@ -151,68 +150,98 @@ void keyboard(unsigned char a, int x, int y)
 {
    const float speed = 1.f;
 
-   switch(a)
+   switch (a)
    {
-      case 'w':
+      case 'w':   // move view forward
       case 'W':
          position.mLookAt -= position.dir() * speed;
          break;
 
-      case 's':
+      case 's':   // move view backward
       case 'S':
          position.mLookAt += position.dir() * speed;
          break;
 
-      case 'd':
+      case 'd':   // move view right
       case 'D':
          position.mLookAt += position.right() * 0.5f;
          break;
 
-      case 'a':
+      case 'a':   // move view left
       case 'A':
          position.mLookAt -= position.right() * 0.5f;
          break;
 
-      case 'q':
+      case 'q':   // yaw back rotate
       case 'Q':
          position.mYaw = normalize360(position.mYaw - speed);
          break;
 
-      case 'e':
+      case 'e':   // yaw rotate
       case 'E':
          position.mYaw = normalize360(position.mYaw + speed);
          break;
 
-      case 't':
+      case 't':   // pitch-up
       case 'T':
          position.mPitch = normalize360(position.mPitch + speed);
          break;
 
-      case 'g':
+      case 'g':   // pitch-down
       case 'G':
          position.mPitch = normalize360(position.mPitch - speed);
          break;
 
-      case '+':
+      case '+':   // zoom-out
          position += speed;
          break;
 
-      case '-':
+      case '-':   // zoom-in
          position -= speed;
          break;
 
-      case 'u':   // up-view
+      case 'u':   // view-up
       case 'U':
          position = CView(90.f, position.mYaw, position.mRadius, position.lookAt());
          break;
 
-      case 'r':
-      case 'R':
-         p.set(0, 0, -5);
-         l.set(0, 0, 0);
-         u.set(0, 1, 0);
+      case 'j':   // jump view-down
+      case 'J':
+         position = CView(10.f, position.mYaw, position.mRadius, position.lookAt());
          break;
 
+      case 'r':   // reset to default params
+      case 'R':
+         p = Vec3(0.f, 0.f, -5.f);
+         l = Vec3(0.f, 0.f, 0.f);
+         u = Vec3(0.f, 1.f, 0.f);
+         position = CView(10.f, 60.f, Radius, Vec3());
+         break;
+
+      case 'x':   // scroll frustum right
+      case 'X':
+         p += position.scroll_right() * 0.5f;
+         l += position.scroll_right() * 0.5f;
+         break;
+
+      case 'z':   // scroll frustum left
+      case 'Z':
+         p -= position.scroll_right() * 0.5f;
+         l -= position.scroll_right() * 0.5f;
+         break;
+
+      case 'y':   // scroll frustum forward
+      case 'Y':
+         p -= position.scroll_dir() * 0.5f;
+         l -= position.scroll_dir() * 0.5f;
+         break;
+
+      case 'h':   // scroll frustum backward
+      case 'H':
+         p += position.scroll_dir() * 0.5f;
+         l += position.scroll_dir() * 0.5f;
+         break;
+      
       case 'f':
       case 'F':
          frustumOn = !frustumOn;
@@ -223,30 +252,6 @@ void keyboard(unsigned char a, int x, int y)
          frustum.print();
          break;
 
-      case 'x':
-      case 'X':
-         p += position.scroll_right() * 0.5f;
-         l += position.scroll_right() * 0.5f;
-         break;
-
-      case 'z':
-      case 'Z':
-         p -= position.scroll_right() * 0.5f;
-         l -= position.scroll_right() * 0.5f;
-         break;
-
-      case 'y':
-      case 'Y':
-         p -= position.scroll_dir() * 0.5f;
-         l -= position.scroll_dir() * 0.5f;
-         break;
-
-      case 'h':
-      case 'H':
-         p += position.scroll_dir() * 0.5f;
-         l += position.scroll_dir() * 0.5f;
-         break;
-      
       case 27: 
          exit(0);
          break;
@@ -289,7 +294,6 @@ void viewer(int argc, char **argv)
 int main(int argc, char **argv)
 {
    viewer(argc, argv);
-
    return 0;
 }
 
