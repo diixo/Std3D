@@ -114,7 +114,7 @@ void render()
 void renderScene()
 {
    char title[150];
-   float fps,time;
+   float fps;
 
    glClearColor(0.f, 0.f, 0.f, 0.f);
    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -131,13 +131,14 @@ void renderScene()
 
    frame++;
 
-   time = glutGet(GLUT_ELAPSED_TIME);
-   if (time - timebase > 1000)
+   int t_ms = glutGet(GLUT_ELAPSED_TIME);
+
+   if (t_ms - timebase > 1000)
    {
-      fps = frame*1000.0/(time-timebase);
-      timebase = time;
+      fps = float(frame*1000)/float(t_ms - timebase);
+      timebase = t_ms;
       frame = 0;
-      sprintf_s(title, "Frustum_Spheres( Drawn=%d, Total=%d ) FPS=%.1f, R=%.1f, pitch=%.1f, yaw=%.1f (w-s, a-d, q-e, z-x, t-g, y-h, u-j)",
+      sprintf_s(title, "Frustum_Spheres( Drawn=%d, Total=%d ) FPS=%.1f, R=%.1f, pitch=%.1f, yaw=%.1f (w-s, a-d, q-e, z-x, t-g, y-h, u-j, r)",
          spheresDrawn, spheresTotal, fps, position.mRadius, position.mPitch, position.mYaw);
       glutSetWindowTitle(title);
    }
