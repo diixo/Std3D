@@ -124,7 +124,7 @@ void renderScene()
 
    view.update(position);
 
-   glLoadMatrixf(view.getView());
+   glLoadMatrixf(view.getMtxView());
 
    frustum.update(p, l, u);
 

@@ -43,7 +43,7 @@ public:
 
    CView(const SPosition& position);
 
-   const Matrix4x4& getView() const
+   const Matrix4x4& getMtxView() const
    {
       return mView;
    }
