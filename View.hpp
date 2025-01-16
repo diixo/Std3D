@@ -72,6 +72,7 @@ struct CView
    float mYaw;
    float mRadius;
    Vec3 mLookAt;
+private:
    Matrix4x4 mView;
 };
 
