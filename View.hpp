@@ -10,7 +10,7 @@
 
 #include "Matrix.hpp"
 
-// Orbital view
+
 struct SPosition
 {
    SPosition(const float pitch, const float yaw, const float radius, const Vec3& lookAt);
@@ -37,6 +37,8 @@ struct SPosition
 
 };
 
+
+// Orbital view
 class CView
 {
 public:
