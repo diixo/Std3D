@@ -11,23 +11,37 @@
 #include "Matrix.hpp"
 
 // Orbital view
-struct CView
+struct SPosition
 {
-   CView(const float pitch, const float yaw, const float radius, const Vec3& lookAt);
+   SPosition(const float pitch, const float yaw, const float radius, const Vec3& lookAt);
 
-   void update();
-
-   CView& operator += (float value)
+   void setRadius(float value)
    {
-      mRadius = maximum(0.f, mRadius - value);
-      return *this;
+      mRadius = maximum(0.f, this->mRadius + value);
    }
 
-   CView& operator -= (float value)
+   void setPitch(float value)
    {
-      mRadius = maximum(0.f, mRadius + value);
-      return *this;
+      mPitch = normalize360(this->mPitch + value);
    }
+
+   void setYaw(float value)
+   {
+      mYaw = normalize360(this->mYaw + value);
+   }
+
+   float mPitch;
+   float mYaw;
+   float mRadius;
+   Vec3 mLookAt;
+
+};
+
+class CView
+{
+public:
+
+   CView(const SPosition& position);
 
    const Matrix4x4& getView() const
    {
@@ -49,30 +63,25 @@ struct CView
       return Vec3(mView[2], mView[6], mView[10]);
    }
 
-   const Vec3& lookAt() const
-   {
-      return mLookAt;
-   }
-
    Vec3 scroll_dir() const
    {
-      Matrix3x3 Myaw = Matrix3x3::makeRotateY(this->mYaw);
+      Matrix3x3 Myaw = Matrix3x3::makeRotateY(mFinalPosition.mYaw);
       Myaw.transpose();
       return Vec3(Myaw.m[2], Myaw.m[5], Myaw.m[8]);
    }
 
    Vec3 scroll_right() const
    {
-      Matrix3x3 Myaw = Matrix3x3::makeRotateY(this->mYaw);
+      Matrix3x3 Myaw = Matrix3x3::makeRotateY(mFinalPosition.mYaw);
       Myaw.transpose();
       return Vec3(Myaw.m[0], Myaw.m[3], Myaw.m[6]);
    }
 
-   float mPitch;
-   float mYaw;
-   float mRadius;
-   Vec3 mLookAt;
+   void update(const SPosition& position);
+
 private:
+
+   SPosition mFinalPosition;
    Matrix4x4 mView;
 };
 

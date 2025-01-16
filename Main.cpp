@@ -28,7 +28,8 @@ int spheresDrawn = 0;
 int spheresTotal = 0;
 
 
-CView position(10.f, 60.f, Radius, Vec3());
+SPosition position(10.f, 60.f, Radius, Vec3());
+CView view(position);
 
 Vec3 p(0,0,-5), l(0,0,0), u(0,1,0); // pos,lookAt,up
 
@@ -121,9 +122,9 @@ void renderScene()
 
    glMatrixMode(GL_MODELVIEW);
 
-   position.update();
+   view.update(position);
 
-   glLoadMatrixf(position.getView());
+   glLoadMatrixf(view.getView());
 
    frustum.update(p, l, u);
 
@@ -155,60 +156,60 @@ void keyboard(unsigned char a, int x, int y)
    {
       case 'w':   // move view forward
       case 'W':
-         position.mLookAt -= position.dir() * speed;
+         position.mLookAt -= view.dir() * speed;
          break;
 
       case 's':   // move view backward
       case 'S':
-         position.mLookAt += position.dir() * speed;
+         position.mLookAt += view.dir() * speed;
          break;
 
       case 'd':   // move view right
       case 'D':
-         position.mLookAt += position.right() * 0.5f;
+         position.mLookAt += view.right() * 0.5f;
          break;
 
       case 'a':   // move view left
       case 'A':
-         position.mLookAt -= position.right() * 0.5f;
+         position.mLookAt -= view.right() * 0.5f;
          break;
 
       case 'q':   // yaw back rotate
       case 'Q':
-         position.mYaw = normalize360(position.mYaw - speed);
+         position.setYaw(-speed);
          break;
 
       case 'e':   // yaw rotate
       case 'E':
-         position.mYaw = normalize360(position.mYaw + speed);
+         position.setYaw(speed);
          break;
 
       case 't':   // pitch-up
       case 'T':
-         position.mPitch = normalize360(position.mPitch + speed);
+         position.setPitch(speed);
          break;
 
       case 'g':   // pitch-down
       case 'G':
-         position.mPitch = normalize360(position.mPitch - speed);
+         position.setPitch(-speed);
          break;
 
-      case '+':   // zoom-out
-         position += speed;
+      case '+':   // zoom-in
+         position.setRadius(-speed);
          break;
 
-      case '-':   // zoom-in
-         position -= speed;
+      case '-':   // zoom-out
+         position.setRadius(speed);
          break;
 
       case 'u':   // view-up
       case 'U':
-         position = CView(90.f, position.mYaw, position.mRadius, position.lookAt());
+         position = SPosition(90.f, position.mYaw, position.mRadius, position.mLookAt);
          break;
 
       case 'j':   // jump view-down
       case 'J':
-         position = CView(10.f, position.mYaw, position.mRadius, position.lookAt());
+         position = SPosition(10.f, position.mYaw, position.mRadius, position.mLookAt);
          break;
 
       case 'r':   // reset to default params
@@ -216,31 +217,31 @@ void keyboard(unsigned char a, int x, int y)
          p = Vec3(0.f, 0.f, -5.f);
          l = Vec3(0.f, 0.f, 0.f);
          u = Vec3(0.f, 1.f, 0.f);
-         position = CView(10.f, 60.f, Radius, Vec3());
+         position = SPosition(10.f, 60.f, Radius, Vec3());
          break;
 
       case 'x':   // scroll frustum right
       case 'X':
-         p += position.scroll_right() * 0.5f;
-         l += position.scroll_right() * 0.5f;
+         p += view.scroll_right() * 0.5f;
+         l += view.scroll_right() * 0.5f;
          break;
 
       case 'z':   // scroll frustum left
       case 'Z':
-         p -= position.scroll_right() * 0.5f;
-         l -= position.scroll_right() * 0.5f;
+         p -= view.scroll_right() * 0.5f;
+         l -= view.scroll_right() * 0.5f;
          break;
 
       case 'y':   // scroll frustum forward
       case 'Y':
-         p -= position.scroll_dir() * 0.5f;
-         l -= position.scroll_dir() * 0.5f;
+         p -= view.scroll_dir() * 0.5f;
+         l -= view.scroll_dir() * 0.5f;
          break;
 
       case 'h':   // scroll frustum backward
       case 'H':
-         p += position.scroll_dir() * 0.5f;
-         l += position.scroll_dir() * 0.5f;
+         p += view.scroll_dir() * 0.5f;
+         l += view.scroll_dir() * 0.5f;
          break;
       
       case 'f':

@@ -8,21 +8,31 @@
 #include "View.hpp"
 
 
-CView::CView(const float pitch, const float yaw, const float radius, const Vec3& lookAt)
+SPosition::SPosition(const float pitch, const float yaw, const float radius, const Vec3& lookAt)
    : mPitch(pitch)
    , mYaw(yaw)
    , mRadius((float)::fabs(radius))
    , mLookAt(lookAt)
-   , mView()
 {
-   this->update();
 }
 
-
-void CView::update()
+CView::CView(const SPosition& position)
+   : mFinalPosition(0.f, 0.f, 0.f, Vec3())
+   , mView()
 {
+   this->update(position);
+}
+
+void CView::update(const SPosition& position)
+{
+   mFinalPosition = position;
+
    // the same as current implementation:
-   mView = Matrix4x4::makeLookAt(mRadius, mPitch, mYaw, mLookAt);
+   mView = Matrix4x4::makeLookAt(
+      mFinalPosition.mRadius,
+      mFinalPosition.mPitch,
+      mFinalPosition.mYaw,
+      mFinalPosition.mLookAt);
 
    // the same current implementation:
    //return Matrix4x4::makeLookAt(mRadius, mPitch, mYaw, Vec3());
